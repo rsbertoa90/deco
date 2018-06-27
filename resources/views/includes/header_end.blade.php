@@ -8,6 +8,8 @@
 
 
     <body class="fixed-left">
+    {{-- <script src="{{asset('js/fbsdk.js')}}"></script> --}}
+    
 
 @include('includes/leftbar')
 

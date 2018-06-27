@@ -12,7 +12,7 @@ class FonikController extends Controller
     public function showView($name)
     {
         if(View::exists($name)){
-            return view($name);
+            return view("$name");
         }
         else{
             return view('pages-404');
