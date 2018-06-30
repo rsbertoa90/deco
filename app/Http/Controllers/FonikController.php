@@ -11,8 +11,8 @@ class FonikController extends Controller
 
     public function showView($name)
     {
-        if(View::exists($name)){
-            return view("$name");
+        if(View::exists("fonik.$name")){
+            return view("fonik.$name");
         }
         else{
             return view('pages-404');

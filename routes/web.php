@@ -19,9 +19,9 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('{name?}','FonikController@showView');
 
 Auth::routes();
 // OAuth Routes
 Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('{name?}','FonikController@showView');

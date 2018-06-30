@@ -23,7 +23,7 @@ class User extends Authenticatable
      */
    
     protected $fillable = [
-        'name', 'email', 'password', 'provider', 'provider_id'
+        'name', 'email', 'password', 'provider', 'provider_id'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -42,6 +42,15 @@ class User extends Authenticatable
     public function role()
     {
       return $this->roles()->first()->name;
+    }
+
+    public function personal_data(){
+        return $this->hasOne('App\PersonalData');
+    }
+
+    public function Events()
+    {
+        return $this->belongsToMany(Event::class,'inscriptions');
     }
 
 }
