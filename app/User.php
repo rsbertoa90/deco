@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
+use App\PersonalData;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
@@ -44,8 +45,8 @@ class User extends Authenticatable
       return $this->roles()->first()->name;
     }
 
-    public function personal_data(){
-        return $this->hasOne('App\PersonalData');
+    public function data(){
+        return $this->hasOne(PersonalData::class);
     }
 
     public function Events()

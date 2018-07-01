@@ -13,7 +13,7 @@ class ProgramSeeder extends Seeder
     {
         $seminars = App\Seminar::all();
         foreach ($seminars as $seminar) {
-            factory(App\Program::class,3)->create(['seminar_id'=>$seminar->id]);
+            factory(App\Program::class,2)->create(['seminar_id'=>$seminar->id]);
         }
     }
 }

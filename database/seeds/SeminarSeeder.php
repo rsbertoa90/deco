@@ -11,6 +11,6 @@ class SeminarSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Seminar::class)->times(10)->create();
+        factory(App\Seminar::class)->times(3)->create();
     }
 }

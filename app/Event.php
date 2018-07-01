@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
+use App\Seminar;
+use App\User;
+use App\Inscription;
+use App\Program;
 
 class Event extends Model
 {
@@ -14,7 +19,7 @@ class Event extends Model
 
     public function program()
     {
-        return $this->belognsTo(App\Program::class);
+        return $this->belongsTo(Program::class);
     }
 
     public function getPriceAttribute($value)
@@ -30,5 +35,22 @@ class Event extends Model
     public function users()
     {
         return $this->belongsToMany(User::class,'inscriptions');
+    }
+
+    public function inscriptions(){
+        return $this->hasMany(Inscription::class);
+    }
+
+    public function date(){
+        return  $this->date->toDateString();
+    }
+    
+    public function time(){
+        return  $this->date->toTimeString();
+    }
+
+    public function seminar()
+    {
+        return $this->belongsTo(Seminar::class);
     }
 }

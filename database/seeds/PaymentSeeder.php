@@ -12,13 +12,14 @@ class PaymentSeeder extends Seeder
     public function run()
     {
         $inscriptions = App\Inscription::all();
-        foreach ($inscriptions as $inscrption)
+        foreach ($inscriptions as $inscription)
         {
-            if($inscription->event->date < now()){
+            if( $inscription->event->date < now()){
                 $pay = new App\Payment();
-                $pay->payment_type = 1;
-                $pay->amount = $inscription->program->price;
+                $pay->payment_type_id = 1;
+                $pay->amount = $inscription->event->price;
                 $pay->inscription_id = $inscription->id;
+                $pay->save();
             }
         }
     }

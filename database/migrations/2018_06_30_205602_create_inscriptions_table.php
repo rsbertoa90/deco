@@ -21,7 +21,7 @@ class CreateInscriptionsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->ondelete('cascade');
             $table->string('status')->nullable();
             $table->string('assistence')->nullable();
-            $table->text('comments');
+            $table->text('comments')->nullable();
             $table->timestamps();
         });
     }

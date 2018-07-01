@@ -14,8 +14,6 @@
                                 </li>
                                 <li class="hide-phone list-inline-item app-search">
                                     <h3 class="page-title">Dashboard</h3>
-                                    <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
-                                    
                                 </li>
                             </ul>
 

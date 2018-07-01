@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\User;
 class PersonalData extends Model
 {
     //
@@ -11,7 +11,7 @@ class PersonalData extends Model
     protected $guarded = [];
 
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->BelongsTo(User::class);
     }
 
     public function fullName(){

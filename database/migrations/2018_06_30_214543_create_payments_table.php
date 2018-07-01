@@ -15,14 +15,14 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('payment_type')->unsigned();
-            $table->foreign('payment_type')->references('id')->on('payment_types');
+            $table->integer('payment_type_id')->unsigned();
+            $table->foreign('payment_type_id')->references('id')->on('payment_types');
             $table->string('entity')->nullable();
             $table->string('transaction_id')->nullable();
             $table->integer('inscription_id')->unsigned();
             $table->foreign('inscription_id')->references('id')->on('inscriptions');
             $table->integer('amount');
-            $table->text('comments');
+            $table->text('comments')->nullable();
             $table->timestamps();
         });
     }

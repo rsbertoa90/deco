@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Event;
+use App\User;
+use App\PersonalData;
 class InscriptionSeeder extends Seeder
 {
     /**
@@ -11,18 +13,20 @@ class InscriptionSeeder extends Seeder
      */
     public function run()
     {
-        $events = App\Event::all();
-
+        $events = Event::all();
+        
+            
         foreach($events as $event)
         {
-            $users = App\User::where('state',$event->state);
-            if($users)
-            {
-                foreach ($users as $user) 
-                {
-                    $event->users()-attach($user);
+
+            $data = PersonalData::all();
+            foreach ($data as $d){
+                if ($d->state == $event->state){
+                    $user = $d->user;
+                    $event->users()->attach($user);
                 }
-            }    
+            }
+
         }
     }
 }
