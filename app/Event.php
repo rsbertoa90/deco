@@ -17,10 +17,7 @@ class Event extends Model
     protected $guarded =[];
     protected $dates = ['created_at','updated_at','date'];
 
-    public function program()
-    {
-        return $this->belongsTo(Program::class);
-    }
+  
 
     public function getPriceAttribute($value)
     {

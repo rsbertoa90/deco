@@ -11,6 +11,18 @@
 |
 */
 
+Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
+    
+    Route::get('/','AdminController@panel');
+
+    // AJAX
+    Route::get('/edi-table-seminars','AdminController@ediTableSeminars');
+
+    Route::get('/edi-table-seminar/{id}','AdminController@ediTableSeminar');
+
+});
+
+Route::get('/test',function(){return view('test');});
 Route::get('/','HomeController@index');
 
 

@@ -15,14 +15,15 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('program_id')->unsigned();
-            $table->foreign('program_id')->references('id')->on('programs');
+            $table->integer('seminar_id')->unsigned();
+            $table->foreign('seminar_id')->references('id')->on('seminars');
             $table->datetime('date');
             $table->integer('quota')->nullable();
             $table->integer('price')->nullable();
             $table->string('state');
             $table->string('city');
             $table->string('address');
+            $table->text('description')->nullable();
             $table->text('comments')->nullable();
             $table->softDeletes();
             $table->timestamps();

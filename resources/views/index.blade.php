@@ -2,25 +2,10 @@
 
 @section('content')
 <div class="row display-flex flex-column">
+    <div class="row">
+        <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
+    </div>
     <h2>Datos de testeo</h2>
-    <h2>Usuarios</h2>
-    <table class="table table-striped">
-        <tr>
-            <th></th>
-            <th>Nombre</th>
-            <th>Mail</th>
-        </tr>
-        @foreach($users as $user)
-            <tr>
-                <td class="">
-                    
-                        <img class="img-fluid img-circle thumb-md rounded-circle" src="{{asset($user->data->avatar)}}" alt="{{$user->id}}">
-              </td>
-                <td class="">{{$user->data->fullName()}}</td>
-                <td class="">{{$user->email}}</td>
-            </tr>  
-        @endforeach
-    </table>
 </div>
 
 <div class="container display-flex flex-column ">
@@ -29,56 +14,32 @@
     <div class="row display-flex flex-column mt-4">
         <h2 class="text-center text-primary">{{$sem->title}}</h2>
         <span class="text-center">{{$sem->description}}</span>
-        <h4>Programas:</h4>    
             
-            @foreach ($sem->programs as $program )
-
-            <row>
-                <h4 class="font-weight-bold text-info mt-5">
-                    {{$program->title}}
-                </h4>
-                <span>
-                    {{$program->description}}
-                </span>
-                <div>
-                    <h5>
-                        Temario:
-                    </h5>
-                    <ul>
-                        @foreach ($program->topics as $topic )
-                            <li> {{$topic->name}} </li>
-                        {{-- {{ $program->topics->pluck('name')->implode(', ') }} --}}
-                        @endforeach
-                    </ul>            
-                </div>
-                
-            <row>    
-            
-            <h5>Fechas:</h5>    
-                <table class="table table-striped table-responsive">
-                        <tr>
-                            <th>
+              <h5>Fechas:</h5>    
+                <table  class="table table-striped table-responsive  table-bordered">
+                        <tr >
+                            <th class="font-weight-bold">
                                 Localidad
                             </th>
-                            <th>
+                            <th class="font-weight-bold">
                                 Fecha
                             </th>
-                            <th>
+                            <th class="font-weight-bold">
                                 Hora
                             </th>
                         </tr>
-                        @foreach ($program->events as $event)
+                        @foreach ($sem->events as $event)
                             <tr>
                                 <td>{{ $event->city }}</td>
-                                <td> {{ $event->date() }} </td>
-                                <td> {{$event->time() }} </td>
+                                <td> {{ $event->date->format('d/m/y') }} </td>
+                                <td> {{$event->date->format('h:i') }} </td>
                             </tr>
                         @endforeach
                         
                 </table>
             
-            @endforeach
-        </table>
+            
+        
     </div>
     @endforeach
     
@@ -86,7 +47,16 @@
 
 <div class="row flex-column d-flex">
     <h4>Pagos</h4>
-    <table class="table table-striped">
+    <table id="datatable" class="table table-striped table-bordered">
+            <thead>
+                    <tr>
+                        <th> - </th>
+                        <th>Tipo de pago</th>
+                        <th>Usuario</th>
+                        <th>Fecha de pago</th>
+                        <th>Monto</th>
+                    </tr>
+                    </thead>
         @foreach ($payments as $pay )
         <tr>
             <td>
@@ -101,4 +71,15 @@
     </table>
   
 </div>
+@endsection
+
+@section('js')
+     <!-- Required datatable js -->
+     <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
+     <script src="assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+     
+     <script>
+         $('#datatable').dataTable();
+     </script>
+
 @endsection

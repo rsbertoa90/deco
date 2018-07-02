@@ -7,9 +7,12 @@
         <meta content="Admin Dashboard" name="description" />
         <meta content="Themesbrand" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+         
+        <!-- CSRF Token -->
+         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- App Icons -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
 
         <!-- App title -->
-        <title>Fonik - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>Deco Gestor</title>

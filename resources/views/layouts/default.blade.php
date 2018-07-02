@@ -6,18 +6,16 @@
 @include('includes/header_end')
 
                             <!-- Page title -->
-                            <ul class="list-inline menu-left mb-0">
+                            {{-- <ul class="list-inline menu-left mb-0">
                                 <li class="list-inline-item">
                                     <button type="button" class="button-menu-mobile open-left waves-effect">
                                         <i class="ion-navicon"></i>
                                     </button>
                                 </li>
                                 <li class="hide-phone list-inline-item app-search">
-                                    <h3 class="page-title">Dashboard</h3>
-                                    <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
-                                    
+                                    <h3 class="page-title">Dashboard</h3>         
                                 </li>
-                            </ul>
+                            </ul> --}}
 
                             <div class="clearfix"></div>
                         </nav>
@@ -60,6 +58,8 @@
 
 @include('includes/footer_start')
 
+{{-- @include('includes.footer_account') --}}
+        @yield('js')
         <!--Morris Chart-->
         {{-- <script src="assets/plugins/morris/morris.min.js"></script> --}}
         {{-- <script src="assets/plugins/raphael/raphael-min.js"></script> --}}

@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::put('/seminar/edit','SeminarController@edit');
+
+Route::delete('/seminar/delete/{id}','SeminarController@delete');
+
+Route::get('/seminar/create-form','SeminarController@createForm');
+
+Route::post('/seminar/create','SeminarController@create');

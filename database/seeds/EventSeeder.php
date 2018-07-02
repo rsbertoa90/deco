@@ -14,10 +14,10 @@ class EventSeeder extends Seeder
         $past = now()->subMonth(2);
         $future = now()->addMonth(2);
 
-        $programs = App\Program::all();
-        foreach ($programs as $program) {
-            factory(App\Event::class,4)->create(['date'=>$past , 'program_id'=>$program->id]);
-            factory(App\Event::class)->create(['date'=>$future, 'program_id'=>$program->id]);
+        $seminars = App\Seminar::all();
+        foreach ($seminars as $seminar) {
+            factory(App\Event::class,4)->create(['date'=>$past , 'seminar_id'=>$seminar->id]);
+            factory(App\Event::class)->create(['date'=>$future, 'seminar_id'=>$seminar->id]);
         }
     }
 }

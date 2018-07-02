@@ -12,9 +12,9 @@ class Seminar extends Model
     protected $guarded = [];
     
     
-    public function programs()
+    public function events()
     {
-        return $this->hasMany(Program::class);
+        return $this->hasMany(Event::class);
     }
 
 
