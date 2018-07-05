@@ -6,7 +6,7 @@
         <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
     </div>
     <h2>Datos de testeo</h2>
-    @if (Auth::user()->isAdmin())
+    @if (Auth::check() && Auth::user()->isAdmin())
         <a href="/admin" class=" col-12 col-lg-2 text-center button btn-lg btn-danger">ACA JONY</a>
     @endif
 </div>
