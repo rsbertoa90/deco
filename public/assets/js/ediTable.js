@@ -71,4 +71,14 @@ $(window).on('load',function()
         $('#create-form-container').load('/api/seminar/create-form');
     });
 
+
+
+
+    //EVENTOS 
+
+    
+
+
 })
+
+

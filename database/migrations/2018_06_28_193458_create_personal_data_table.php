@@ -23,7 +23,6 @@ class CreatePersonalDataTable extends Migration
             $table->string('state')->nullable();
             $table->string('city')->nullable();
             $table->string('address')->nullable();
-            
             $table->foreign('user_id')
             ->references('id')
             ->on('users')
