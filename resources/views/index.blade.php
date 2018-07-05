@@ -6,6 +6,9 @@
         <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
     </div>
     <h2>Datos de testeo</h2>
+    @if (Auth::user()->isAdmin())
+        <a href="/admin" class=" col-12 col-lg-2 text-center button btn-lg btn-danger">ACA JONY</a>
+    @endif
 </div>
 
 <div class="container display-flex flex-column ">
@@ -16,8 +19,11 @@
         <span class="text-center">{{$sem->description}}</span>
             
               <h5>Fechas:</h5>    
-                <table  class="table table-striped table-responsive  table-bordered">
+                <table  class="table table-striped  table-bordered">
                         <tr >
+                            <th class="font-weight-bold">
+                                Provincia
+                            </th>
                             <th class="font-weight-bold">
                                 Localidad
                             </th>
@@ -27,12 +33,21 @@
                             <th class="font-weight-bold">
                                 Hora
                             </th>
+                            <th class="font-weight-bold">
+                                Inscriptos
+                            </th>
+                            <th class="font-weight-bold">
+                                Precio
+                            </th>
                         </tr>
-                        @foreach ($sem->events as $event)
+                        @foreach ($sem->futureEvents('presencial') as $event)
                             <tr>
+                                <td>{{ $event->state }}</td>
                                 <td>{{ $event->city }}</td>
                                 <td> {{ $event->date->format('d/m/y') }} </td>
                                 <td> {{$event->date->format('h:i') }} </td>
+                                <td> {{ $event->inscriptions->count() }} /  {{$event->quota}} </td>
+                                <td> {{ $event->price }} </td>
                             </tr>
                         @endforeach
                         
@@ -47,7 +62,7 @@
 
 <div class="row flex-column d-flex">
     <h4>Pagos</h4>
-    <table id="datatable" class="table table-striped table-bordered">
+    <table id="datatable" class="table table-striped">
             <thead>
                     <tr>
                         <th> - </th>

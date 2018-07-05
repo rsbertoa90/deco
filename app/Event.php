@@ -14,9 +14,10 @@ class Event extends Model
 {
     //
     use SoftDeletes;
+    
     protected $table = 'events';
     protected $guarded =[];
-    protected $dates = ['created_at','updated_at','date'];
+    protected $dates = ['created_at','updated_at','date','deleted_at'];
 
   
 
@@ -52,13 +53,13 @@ class Event extends Model
         return $this->belongsTo(Seminar::class);
     }
 
-    public static function past()
+    public static function past($mode)
     {
-        return self::where('date','<', now())->get();
+        return self::where('date','<', now())->where('mode',$mode)->get();
     }
 
-    public static function future()
+    public static function future($mode)
     {
-        return self::where('date','>=', now())->get();
+        return self::where('date','>=', now())->where('mode',$mode)->get();
     }
 }

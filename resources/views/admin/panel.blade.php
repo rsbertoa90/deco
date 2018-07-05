@@ -22,6 +22,9 @@
 <div class="row d-flex flex-column mt-5" id="events-table-container">
     @include('admin.events.edi-table')
 </div>
+<div class="row d-flex flex-column mt-5" id="online-events-table-container">
+    @include('admin.events.edi-table-online')
+</div>
 
 
 @endsection
@@ -34,7 +37,9 @@
     {{-- <script>
         $('#table').editableTableWidget().numericInputExample().find('td:first').focus();
     </script> --}}
+    <script type="text/javascript" src="assets/plugins/parsleyjs/parsley.min.js"></script>
 
     <script src="assets/js/ediTable.js"></script>
     <script src="assets/js/citySelectors.js"></script>
+
 @endsection

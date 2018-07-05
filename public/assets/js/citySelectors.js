@@ -1,17 +1,20 @@
-$(window).on('load',function(){
+var updateCity = function(dataId,state,city){
+    var data = {id:dataId,state:state,city:city};
+    $.ajax({
+        method: 'PUT',
+        url:'/api/event/updateCity',
+        data:data,
+        success: function(response){
+            // console.log(response);
+            
+        }
+    });
+}
 
-    var updateCity = function(dataId,state,city){
-        var data = {id:dataId,state:state,city:city};
-        $.ajax({
-            method: 'PUT',
-            url:'/api/event/updateCity',
-            data:data,
-            success: function(response){
-                // console.log(response);
-                
-            }
-        });
-    }
+
+var poblateCitySelectors = function(){
+
+    
    
 var countrysUrl = 'http://pilote.techo.org/?do=api.getPaises';
 var statesUrl = 'http://pilote.techo.org/?do=api.getRegiones?idPais=';
@@ -59,14 +62,18 @@ var countrySelectors = $('.country-selector');
 
         $(this).on('change',function(){
             $(this).parent().find('span').hide();
-            dataId = $(this).parent().parent().attr('data-id'); 
+            if($(this).attr('data-id') > 0 ){
+                dataId = $(this).parent().parent().attr('data-id'); 
+            } else { dataId = 0 ;}
+
             // console.log(dataId);
             
             selected = $(this).val();
             code=$(this).find('option:selected').attr('data-code');
             url=statesUrl+code;
             $(stateSelectors).each(function(){ 
-                if ($(this).attr('data-id').trim() == dataId.trim()){
+                if (typeof dataId == 'undefined'){dataId = "0";}
+                if ( $(this).attr('data-id').trim() == dataId.trim()){
                     selector = this;
                     fetchData(url, selector,poblate);
 
@@ -80,6 +87,7 @@ var countrySelectors = $('.country-selector');
                         
                         $(citySelectors).each(function()
                         { 
+                            if (typeof dataId == 'undefined'){dataId = "0";}
                             if ($(this).attr('data-id').trim() == dataId.trim())
                             {
                                 selector = this;
@@ -122,18 +130,22 @@ var countrySelectors = $('.country-selector');
                         
                         $(citySelectors).each(function()
                         { 
-                            if ($(this).attr('data-id').trim() == dataId.trim())
+                            // console.log(dataId);
+                            if (typeof dataId == 'undefined'){dataId = "0";}
+                            if (  $(this).attr('data-id').trim() == dataId.trim())
                             {
                                 selector = this;
                                 dataId = dataId.trim();
                                 fetchData(url, selector,poblate);
                             }
-                            $(this).on('change',function(){
-                                $(this).parent().find('span').hide();
-                                selectedCity = $(this).val();
-                                updateCity(dataId,selectedState,selectedCity);
+                            if(dataId>0){
 
-                            });
+                                $(this).on('change',function(){
+                                    $(this).parent().find('span').hide();
+                                    selectedCity = $(this).val();
+                                    updateCity(dataId,selectedState,selectedCity);
+                                });
+                            }
                         });
                         
                 });
@@ -147,4 +159,10 @@ var countrySelectors = $('.country-selector');
 
     
 
-});
+};
+
+$(window).on('load',poblateCitySelectors);
+
+// $('#create-event').on('click',function(){
+//     poblateCitySelectors();
+// });

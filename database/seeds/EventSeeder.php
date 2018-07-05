@@ -16,8 +16,24 @@ class EventSeeder extends Seeder
 
         $seminars = App\Seminar::all();
         foreach ($seminars as $seminar) {
-            factory(App\Event::class,4)->create(['date'=>$past , 'seminar_id'=>$seminar->id]);
-            factory(App\Event::class)->create(['date'=>$future, 'seminar_id'=>$seminar->id]);
+            factory(App\Event::class,4)->create(['date'=>$past , 'seminar_id'=>$seminar->id, 'mode'=>'presencial']);
+            factory(App\Event::class)->create(['date'=>$future, 'seminar_id'=>$seminar->id, 'mode'=>'presencial']);
+
+            // MODALIDAD ONLINE
+            factory(App\Event::class,4)->create(['date'=>$past ,
+                                                'seminar_id'=>$seminar->id,
+                                                 'mode'=>'online',
+                                                  'state'=>'',
+                                                  'city'=>'']);
+
+
+            factory(App\Event::class)->create(['date'=>$future,
+                                                'seminar_id'=>$seminar->id,
+                                                 'mode'=>'online',
+                                                  'state'=>'',
+                                                  'city'=>'']);
+
+
         }
     }
 }

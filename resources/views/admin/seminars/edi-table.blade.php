@@ -32,8 +32,9 @@
                                         {{-- <button  data-object="seminar" data-id="{{$seminar->id}}" class="detail-seminar button btn-md btn-outline-info">
                                             <i class="ion-search"></i>
                                         </button> --}}
-                                        <form action="/api/seminar/delete/{{$seminar->id}}" method='delete'>
+                                        <form action="/api/seminar/delete/{{$seminar->id}}" method='post'>
                                             @csrf
+                                            @method('delete')
                                             <button type='submit' class="ml-1 delete-seminar button btn-md btn-outline-danger">
                                                 <i class="ion-trash-a"></i>
                                             </button>

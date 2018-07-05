@@ -24,14 +24,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::delete('/seminar/delete/{id}','SeminarController@delete');
     
     Route::get('/seminar/create-form','SeminarController@createForm');
+
+    Route::get('/event/create-form','EventController@createForm');
     
     Route::post('/seminar/create','SeminarController@create');
+
+    Route::post('/event/create','EventController@create');
     
     Route::put('/event/updateCity','EventController@updateCity');
     
     Route::put('/event/updateDate','EventController@updateDate');
     
     Route::put('/event/updateTime','EventController@updateTime');
+
+    Route::put('/event/updateNumericField','EventController@updateNumericField');
 
     Route::delete('/event/delete/{id}','EventController@delete');
 // });

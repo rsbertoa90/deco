@@ -71,6 +71,40 @@ $(window).on('load',function()
         $('#create-form-container').load('/api/seminar/create-form');
     });
 
+    //CREAR EVENTO
+    var afterLoad = function(){
+        // console.log('afterLoad');
+        poblateCitySelectors();    
+        // Esconder ciudad/provincia si el seminario sera online
+        $('#mode-select').on('change',function(){
+            if($(this).val()=='online'){
+                $('#state-row').hide();
+                $('#city-row').hide();
+                
+            }
+            else
+            {
+                $('#state-row').show();
+                $('#city-row').show();
+                
+            }
+        });
+
+    }
+   
+    $('#create-event').on('click',function()
+    {
+        var div = '<div id="create-form-container"></div>';
+        $('#event-tables-container').append(div);
+        $('#create-form-container').load('/api/event/create-form',afterLoad);
+    });
+    $('#online-create-event').on('click',function()
+    {
+        var div = '<div id="create-form-container"></div>';
+        $('#online-event-tables-container').append(div);
+        $('#create-form-container').load('/api/event/create-form',afterLoad);
+    });
+
 
 
 
@@ -111,7 +145,33 @@ $(window).on('load',function()
     });
     
     
+    editableFields = $('[contenteditable]');
+    $(editableFields).each(function(){
+        $(this).keydown(function(e){
+            if(e.which == 13){
+                $(this).blur();
+            }
+        });
 
+        $(this).on('blur',function(){
+            value = $(this).text().trim();
+            if($.isNumeric(value))
+            {
+               field = $(this).attr('data-field');
+               id =  $(this).parent().parent().attr('data-id');
+             
+               $.ajax({
+                data : {field:field, id:id, value:value},
+                url : 'api/event/updateNumericField',
+                method : 'PUT'
+            });
+            }
+        });
+
+        
+       
+    });
+    
 
 })
 

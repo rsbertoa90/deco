@@ -44,9 +44,20 @@ class EventController extends Controller
             $date->month = $event->date->month;
             $date->day = $event->date->day;
             $event->date = $date;
-
             $event->save();
           
+        }
+    }
+
+    public function updateNumericField(Request $request)
+    {
+        if($request->id && $request->field && $request->value)
+        {
+            $event = Event::find($request->id);
+            $field = $request->field;
+            $event->$field = $request->value;
+            $event->save();
+            dd($event->$field);
         }
     }
 
@@ -54,7 +65,28 @@ class EventController extends Controller
     {
         $event = Event::find($id);
         $event->delete();
-
         return redirect('/admin');
     }
+
+    public function createForm()
+    {
+        return view('admin.events.create');
+    }
+
+    public function create(Request $request)
+    {
+        $request->validate([
+            'seminar_id'=>'required',
+            'date' => 'required',
+            'time' => 'required'
+            ]);
+
+        $data = $request->except('_token','date','time');
+        $date = new Carbon("{$request->date} {$request->time}");
+        $data['date']=$date;
+        $ev = Event::create($data);
+      
+        return redirect('/admin');
+    }
+
 }

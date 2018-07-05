@@ -11,22 +11,24 @@ class Seminar extends Model
     use SoftDeletes;
     protected $guarded = [];
     protected $table = 'seminars';
+    protected $dates = ['created_at','updated_at','deleted_at'];
     
     public function events()
     {
         return $this->hasMany(Event::class);
     }
 
-    public function pastEvents()
+    public function pastEvents($mode)
     {
-        return $this->events()->where('date','<',now())->get();
+        return $this->events()->where('mode',$mode)->where('date','<',now())->get();
     }
 
-    public function futureEvents()
+    public function futureEvents($mode)
     {
-        return $this->events()->where('date','>=',now())->orderBy('date')->get();
+        return $this->events()->where('mode',$mode)->where('date','>=',now())->orderBy('date')->get();
     }
 
+    
 
 
 

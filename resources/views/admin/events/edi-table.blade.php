@@ -6,7 +6,7 @@
 
                 <h4 class="mt-0 header-title">Proximos eventos - Presencial</h4>
                 {{-- <p class="text-muted m-b-30 font-14">just start typing to edit, or move around with arrow keys or mouse clicks!</p> --}}
-                <div class="" id="tables-container">
+                <div class="" id="event-tables-container">
 
                     <table id="events-table" class="table table-striped m-b-0">
                         <thead>
@@ -35,10 +35,10 @@
                         </tr> 
                         </thead>
                         <tbody>
-                            @foreach (App\Event::future() as $event)
-                  
+                            @foreach (App\Event::future('presencial') as $event)
+                           
                             <tr data-id='{{ $event->id }} '>
-                                <td data-editable="disabled" class="font-weight-bold"> {{ $event->seminar->title }} </td>
+                                <td class="font-weight-bold"> {{ $event->seminar->title }} </td>
                                 <td  data-field="state" > 
                                     <span> {{ $event->state }} </span> <br>
                                     <select name="state" class="state-selector" data-id="{{$event->id}}">
@@ -59,12 +59,17 @@
                                     <input class="" type="time" value="{{$event->date->format('H:i')}}" name="time">
                                 </td>
 
-                                <td>
-                                    {{ $event->quota }}
+                                <td  >
+                                   <span contenteditable="true" data-field="quota">
+                                       {{ $event->quota }}
+                                    </span> 
                                 </td>
 
-                                <td>
-                                    ${{ $event->price }}
+                                <td >
+                                        $
+                                    <span  contenteditable="true" data-field="price">
+                                        {{ $event->price }}
+                                    </span>
                                 </td>
                                
                               
@@ -73,8 +78,9 @@
                                         {{-- <button  data-object="event" data-id="{{$event->id}}" class="detail-event button btn-md btn-outline-info">
                                             <i class="ion-search"></i>
                                         </button> --}}
-                                        <form action="/api/event/delete/{{$event->id}}" method='delete'>
+                                        <form action="/api/event/delete/{{$event->id}}" method='post'>
                                             @csrf
+                                           
                                             @method('delete')
                                             <button type='submit' class="ml-1 delete-event button btn-md btn-outline-danger">
                                                 <i class="ion-trash-a"></i>
@@ -88,8 +94,8 @@
                         </tbody>
                     </table>
                     <div class="row">
-                        <button class="button btn-lg btn-default ml-3 btn-outline-info " id="create-seminar">
-                            Crear seminario
+                        <button class="button btn-lg btn-default ml-3 btn-outline-info " id="create-event">
+                            Crear Evento
                         </button>
                     </div>
                 </div>

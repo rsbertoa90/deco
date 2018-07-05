@@ -22,7 +22,9 @@ class SeminarController extends Controller
     public function delete($id)
     {
         $seminar = Seminar::find($id);
+        $seminar->events()->delete();
         $seminar->delete();
+        
         return redirect('/admin');
     }
 
