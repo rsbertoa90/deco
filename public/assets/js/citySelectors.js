@@ -7,7 +7,7 @@ $(window).on('load',function(){
             url:'/api/event/updateCity',
             data:data,
             success: function(response){
-                console.log(response);
+                // console.log(response);
                 
             }
         });

@@ -39,12 +39,12 @@ class Event extends Model
         return $this->hasMany(Inscription::class);
     }
 
-    public function date(){
-        return  $this->date->toDateString();
+    public function getDate(){
+        return  $this->date->format('d/m/y');
     }
-    
-    public function time(){
-        return  $this->date->toTimeString();
+   
+    public function getTime(){
+        return  $this->date->format('H:i A');
     }
 
     public function seminar()

@@ -75,7 +75,41 @@ $(window).on('load',function()
 
 
     //EVENTOS 
+    dateSelectors = $('[name="date"]');
+    dateSelectors.each(function(){
+        $(this).on('change',function(){
+            var id = $(this).parent().parent().attr('data-id');
+            // console.log(id);
+            var date =$(this).val();
 
+            // console.log(date);
+            
+            $.ajax({
+                data : {date:date, id:id},
+                url : 'api/event/updateDate',
+                method : 'PUT'
+            });
+
+        });
+    });
+
+    timeSelectors = $('[name="time"]');
+    timeSelectors.each(function(){
+        $(this).on('change',function(){
+            var id = $(this).parent().parent().attr('data-id');
+            // console.log(id);
+            var time =$(this).val();
+            console.log(time);
+            
+            $.ajax({
+                data : {time:time, id:id},
+                url : 'api/event/updateTime',
+                method : 'PUT'
+            });
+
+        });
+    });
+    
     
 
 

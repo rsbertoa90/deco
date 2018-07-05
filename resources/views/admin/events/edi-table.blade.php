@@ -26,6 +26,12 @@
                            <th>
                                hora
                            </th>
+                           <th>
+                               Cupo
+                           </th>
+                           <th>
+                               Precio
+                           </th>
                         </tr> 
                         </thead>
                         <tbody>
@@ -45,15 +51,31 @@
                                         <option value=""> Cambiar </option>
                                     </select> 
                                 </td>
-                                <td data-field="state" class=".state-selecor"> </td>
-                                <td data-editable data-field="description"> {{$event->description}} </td>
-                                <td data-editable data-field="description"> {{$event->description}} </td>
+                                <td data-field="date" >     
+                                    <input class="" type="date" value="{{$event->date->format('Y-m-d')}}" name="date">
+                                </td>
+                               
+                                <td data-field="time" >     
+                                    <input class="" type="time" value="{{$event->date->format('H:i')}}" name="time">
+                                </td>
+
+                                <td>
+                                    {{ $event->quota }}
+                                </td>
+
+                                <td>
+                                    ${{ $event->price }}
+                                </td>
+                               
+                              
                                 <td>
                                     <div class="button-group d-flex">
-                                        <button  data-object="event" data-id="{{$event->id}}" class="detail-event button btn-md btn-outline-info">
+                                        {{-- <button  data-object="event" data-id="{{$event->id}}" class="detail-event button btn-md btn-outline-info">
                                             <i class="ion-search"></i>
-                                        </button>
+                                        </button> --}}
                                         <form action="/api/event/delete/{{$event->id}}" method='delete'>
+                                            @csrf
+                                            @method('delete')
                                             <button type='submit' class="ml-1 delete-event button btn-md btn-outline-danger">
                                                 <i class="ion-trash-a"></i>
                                             </button>

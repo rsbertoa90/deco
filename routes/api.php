@@ -26,8 +26,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::get('/seminar/create-form','SeminarController@createForm');
     
     Route::post('/seminar/create','SeminarController@create');
-
+    
     Route::put('/event/updateCity','EventController@updateCity');
+    
+    Route::put('/event/updateDate','EventController@updateDate');
+    
+    Route::put('/event/updateTime','EventController@updateTime');
+
+    Route::delete('/event/delete/{id}','EventController@delete');
 // });
 
 
