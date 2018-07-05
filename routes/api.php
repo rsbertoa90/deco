@@ -40,6 +40,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::put('/event/updateNumericField','EventController@updateNumericField');
 
     Route::delete('/event/delete/{id}','EventController@delete');
+
+    Route::get('/countrys','CityController@countrys');
+
+    Route::get('/states/{country}','CityController@states');
+
+    Route::get('/citys/{state}','CityController@citys');
 // });
 
 

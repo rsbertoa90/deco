@@ -15,10 +15,10 @@ var updateCity = function(dataId,state,city){
 var poblateCitySelectors = function(){
 
     
-   
-var countrysUrl = 'http://pilote.techo.org/?do=api.getPaises';
-var statesUrl = 'http://pilote.techo.org/?do=api.getRegiones?idPais=';
-var citysUrl = 'http://pilote.techo.org/?do=api.getCiudades?idRegionLT=';
+
+var countrysUrl = '/api/countrys/';
+var statesUrl = '/api/states/';
+var citysUrl = '/api/citys/';
 
 var fetchData  = function(url,selectors,callback) {
 	fetch(url)
@@ -26,8 +26,8 @@ var fetchData  = function(url,selectors,callback) {
 			return response.json();
 		})
 		.then(function (dataa) {
-            // console.log(dataa.contenido);
-            callback(selectors,dataa.contenido);
+            // console.log(dataa);
+            callback(selectors,dataa);
 		})
 		.catch(function (error) {
 			console.error(`ERROR: ${error}`);
@@ -41,8 +41,9 @@ var poblate =  function(selectors, withdata){
        $(this).empty();
        var opt = `<option value="">Cambiar</option>`;
        $(selector).append(opt);
-       $.each(withdata, function(key,value){
-               var opt = `<option data-code="${value}" value="${key}">${key}</option>`;
+       $.each(withdata, function(el){
+          el = withdata[el];   
+               var opt = `<option data-code="${el.id}" value="${el.name}">${el.name}</option>`;
                $(selector).append(opt);    
             });
     });
