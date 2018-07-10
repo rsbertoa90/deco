@@ -4,7 +4,7 @@
             <div class="card m-b-20">
                 <div class="card-body">
     
-                    <h4 class="mt-0 header-title">Proximos eventos - Online</h4>
+                    <h4 class="mt-0 header-title font-weight-bold text-info">Proximos eventos - Online</h4>
                     {{-- <p class="text-muted m-b-30 font-14">just start typing to edit, or move around with arrow keys or mouse clicks!</p> --}}
                     <div class="" id="online-event-tables-container">
     

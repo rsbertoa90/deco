@@ -6,8 +6,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
 use App\PersonalData;
+use App\Inscription;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Cart;
+use App\Event;
 
 class User extends Authenticatable
 {
@@ -54,9 +56,30 @@ class User extends Authenticatable
         return $this->hasOne(PersonalData::class);
     }
 
-    public function Events()
+    public function events()
     {
         return $this->belongsToMany(Event::class,'inscriptions');
     }
+
+    public function inscriptions()
+    {
+        return $this->hasMany(Inscription::class);
+    }
+
+    public function paydInscriptions()
+    {
+        return $this->inscriptions()->where('status','pagado')->get();
+    }
+
+    public function pendInscriptions()
+    {
+        return $this->inscriptions()->where('status','pendiente')->get();
+    } 
+
+    public function hasInCart(Event $event)
+    { 
+      return  Cart::content()->where('id',$event->id)->first();
+    }
+    
 
 }

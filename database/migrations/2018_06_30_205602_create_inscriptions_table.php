@@ -22,6 +22,7 @@ class CreateInscriptionsTable extends Migration
             $table->string('status')->nullable();
             $table->string('assistence')->nullable();
             $table->text('comments')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

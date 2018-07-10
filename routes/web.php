@@ -22,16 +22,23 @@ Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
 
 });
 
+Auth::routes();
+
+Route::get('/logout','HomeController@logout');
+
 Route::get('/test',function(){return view('test');});
+
 Route::get('/','HomeController@index');
 
+Route::get('/add-to-cart/{id}','EventController@addToCart');
 
+Route::get('/remove-from-cart/{id}','EventController@removeFromCart');
 
+Route::get('/mis-pagos','PaymentController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Auth::routes();
 // OAuth Routes
 Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
 
@@ -39,3 +46,8 @@ Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallbac
 
 Route::get('{name?}','FonikController@showView');
 
+Route::get('/test', function(){return view('test');});
+
+Route::get('/registerPayment','PaymentController@userForm');
+
+Route::post('/registerPayment','PaymentController@register');

@@ -6,13 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 use App\Payment;
 use App\User;
 use App\Event;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Inscription extends Model
 {
+    use softDeletes;
     protected $guarded = [];
     
     public function payments()
     {
-        return $this->hasMany(Payment::class);
+        return $this->belongsToMany(Payment::class);
     }
 
     public function user(){

@@ -1,18 +1,9 @@
 @extends('layouts.default')
 
 @section('content')
-<div class="row display-flex flex-column">
-    <div class="row">
-        <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
-    </div>
-    <h2>Datos de testeo</h2>
-    @if (Auth::check() && Auth::user()->isAdmin())
-        <a href="/admin" class=" col-12 col-lg-2 text-center button btn-lg btn-danger">ACA JONY</a>
-    @endif
-</div>
 
 <div class="container display-flex flex-column ">
-    <h2>Seminarios</h2>
+    <h2>Proximos seminarios</h2>
     @foreach ($seminars as $sem )
     <div class="row display-flex flex-column mt-4">
         <h2 class="text-center text-primary">{{$sem->title}}</h2>
@@ -39,6 +30,10 @@
                             <th class="font-weight-bold">
                                 Precio
                             </th>
+                            <th  class="font-weight-bold">
+                                -
+                            </th>
+
                         </tr>
                         @foreach ($sem->futureEvents('presencial') as $event)
                             <tr>
@@ -48,6 +43,21 @@
                                 <td> {{$event->date->format('h:i') }} </td>
                                 <td> {{ $event->inscriptions->count() }} /  {{$event->quota}} </td>
                                 <td> {{ $event->price }} </td>
+                                @if ($user)
+                                    @if (!$event->isInscribed($user))
+                                      
+                                        @if ($user->hasInCart($event))
+                                            <td> <a href="/remove-from-cart/{{$event->id}} ">Cancelar inscripcion</a></td>
+                                        @else
+                                            <td> <a href="/add-to-cart/{{$event->id}}" class="add-to-cart button btn-lg btn-outline-success" data-id="{{$event->id}}"> inscribirme </a>   </td>
+                                        @endif
+                                    @else
+                                        <td> <span class="text-success">Inscripto</span> </td>
+                                    @endif
+                                @else
+                                    <td> <button class=" button btn-lg btn-outline-success" data-toggle="modal" data-target=".login-modal" > <i class="ion-ios7-cart"></i> </button>   </td>
+                                    @include('user.login-modal')
+                                @endif
                             </tr>
                         @endforeach
                         
@@ -59,33 +69,9 @@
     @endforeach
     
 </div>
-
-<div class="row flex-column d-flex">
-    <h4>Pagos</h4>
-    <table id="datatable" class="table table-striped">
-            <thead>
-                    <tr>
-                        <th> - </th>
-                        <th>Tipo de pago</th>
-                        <th>Usuario</th>
-                        <th>Fecha de pago</th>
-                        <th>Monto</th>
-                    </tr>
-                    </thead>
-        @foreach ($payments as $pay )
-        <tr>
-            <td>
-                <img class="img-fluid img-circle thumb-md rounded-circle" src="{{asset($pay->inscription->user->data->avatar)}}" alt="{{$pay->inscription->user->data->fullName()}}">
-            </td>
-            <td> {{$pay->type->name}} </td>
-            <td> {{$pay->inscription->user->data->fullName()}} </td>
-            <td> {{$pay->created_at}} </td>
-            <td> ${{$pay->amount}} </td>
-        </tr>
-        @endforeach
-    </table>
-  
-</div>
+@if (Cart::count())
+    @include('user.cart')
+@endif
 @endsection
 
 @section('js')
@@ -96,5 +82,7 @@
      <script>
          $('#datatable').dataTable();
      </script>
+
+    
 
 @endsection

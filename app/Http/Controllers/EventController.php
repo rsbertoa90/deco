@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Event;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Cart;
 
-class EventController extends Controller
+
+class EventController extends Controller 
 {
     public function updateCity(Request $request)
     {
@@ -87,6 +89,27 @@ class EventController extends Controller
         $ev = Event::create($data);
       
         return redirect('/admin');
+    }
+
+    public function addToCart($id)
+    {
+        $event = Event::find($id);
+        //$user = auth()->user();
+        Cart::add($event,1);
+        // Cart::store($user->id);
+        return redirect('/');
+    }
+
+    public function removeFromCart($id)
+    {
+        $event = Event::find($id);
+        $cartItem = Cart::content()->where('id',$event->id)->first();
+        
+        //$user = auth()->user();
+        
+        Cart::remove($cartItem->rowId);
+        // Cart::store($user->id);
+        return redirect('/');
     }
 
 }

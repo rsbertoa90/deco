@@ -41,5 +41,6 @@
 
     <script src="assets/js/ediTable.js"></script>
     <script src="assets/js/citySelectors.js"></script>
+    {{-- <script src="assets/js/vue/citySelectors.js"></script> --}}
 
 @endsection

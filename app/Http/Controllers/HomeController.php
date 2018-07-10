@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Seminar;
 use App\Payment;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -28,7 +29,13 @@ class HomeController extends Controller
     {
         $users = User::all();
         $seminars = Seminar::all();
-        $payments = Payment::all();
-        return view('index',compact('seminars','payments','users'));
+        $user = auth()->user();
+        return view('index',compact('seminars','user'));
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 }

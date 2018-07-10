@@ -9,8 +9,10 @@ use App\Seminar;
 use App\User;
 use App\Inscription;
 use App\Program;
+use Gloudemans\Shoppingcart\Contracts\Buyable;
 
-class Event extends Model
+
+class Event extends Model implements Buyable
 {
     //
     use SoftDeletes;
@@ -61,5 +63,26 @@ class Event extends Model
     public static function future($mode)
     {
         return self::where('date','>=', now())->where('mode',$mode)->get();
+    }
+
+
+    public function getBuyableIdentifier($options = null)
+    {
+        return $this->id;
+    }
+
+    public function getBuyableDescription($options = null)
+    {
+        return $this->seminar->title;
+    }
+
+    public function getBuyablePrice($options = null)
+    {
+        return $this->price;
+    }
+
+    public function isInscribed(User $user)
+    {
+        return $this->inscriptions()->where('user_id',$user->id)->get()->first();
     }
 }

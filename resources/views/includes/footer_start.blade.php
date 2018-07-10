@@ -1,6 +1,6 @@
                 
                 <footer class="footer">
-                    © 2018 Fonik - Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand.
+                    © 2018 Deco Gestor - Made by M<i class="mdi mdi-heart text-danger"></i>M Web.
                 </footer>
 
             </div>

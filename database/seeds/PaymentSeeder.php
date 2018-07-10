@@ -17,9 +17,9 @@ class PaymentSeeder extends Seeder
             if( $inscription->event->date < now()){
                 $pay = new App\Payment();
                 $pay->payment_type_id = 1;
-                $pay->amount = $inscription->event->price;
-                $pay->inscription_id = $inscription->id;
+                $pay->amount = $inscription->event->price / 2;
                 $pay->save();
+                $pay->inscriptions()->attach($inscription);
             }
         }
     }

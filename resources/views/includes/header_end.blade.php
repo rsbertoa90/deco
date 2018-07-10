@@ -9,7 +9,7 @@
     </head>
 
 
-    <body class="fixed-left">
+    <body class="fixed-left mb-5">
     {{-- <script src="{{asset('js/fbsdk.js')}}"></script> --}}
     
 
