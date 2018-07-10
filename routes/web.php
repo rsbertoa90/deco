@@ -51,7 +51,7 @@ Route::get('/registerPayment','PaymentController@userForm');
 
 Route::post('/registerPayment','PaymentController@register');
 
-Route::get('/fbLoginSuccess','Auth\AuthController@findOrRegister');
+Route::get('/fbLoginSuccess','LoginController@findOrRegister');
 
 
 
