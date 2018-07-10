@@ -12,7 +12,7 @@ class LoginController extends Controller
     public function findOrRegister()
     {
         $fbUser =  Socialite::driver('facebook')->user();
-        dd(Auth::user());
+        // dd(Auth::user());
         if ($user = User::where('email',$fbUser->email)->get()->first())
         {
             Auth::login($user);
