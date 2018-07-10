@@ -28,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-       $fbuser = Sociallite::driver('facebook')->user();
+       $fbuser = Socialite::driver('facebook')->user();
        if($fbUser){
            dd($fbUser);
        }
