@@ -51,3 +51,5 @@ Route::get('/test', function(){return view('test');});
 Route::get('/registerPayment','PaymentController@userForm');
 
 Route::post('/registerPayment','PaymentController@register');
+
+Routes::get('/fbLoginSuccess','Auth/AuthController@findOrRegister');
