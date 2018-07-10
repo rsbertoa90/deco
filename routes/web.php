@@ -44,7 +44,6 @@ Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
 
 Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
-Route::get('{name?}','FonikController@showView');
 
 Route::get('/test', function(){return view('test');});
 
@@ -53,3 +52,8 @@ Route::get('/registerPayment','PaymentController@userForm');
 Route::post('/registerPayment','PaymentController@register');
 
 Route::get('/fbLoginSuccess','Auth/AuthController@findOrRegister');
+
+
+
+// FONIK
+Route::get('{name?}','FonikController@showView');
