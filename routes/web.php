@@ -44,6 +44,7 @@ Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
 
 Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
+Route::get('/my-perfil','UserController@profile');
 
 Route::get('/test', function(){return view('test');});
 
