@@ -7,6 +7,7 @@ use App\User;
 use App\Seminar;
 use App\Payment;
 use Illuminate\Support\Facades\Auth;
+use Socialite;
 
 class HomeController extends Controller
 {
