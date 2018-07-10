@@ -12,7 +12,7 @@ class LoginController extends Controller
     public function findOrRegister()
     {
         $fbUser =  Socialite::driver('facebook')->user();
-
+        dd($fbUser);
         if ($user = User::where('email',$fbUser->email)->get()->first())
         {
             Auth::login($user);
@@ -20,13 +20,14 @@ class LoginController extends Controller
         }
         else
         {
-            $new = $fbUser->user;
+            $new = new User(); 
+            $new->email = $fbUser->user->email;
+            $new->name = $fbUser->name;
             $new->provider='facebook';
             $new->provider_id = $fbUser->id;
-            $new->id = null;
             $new->avatar = $fbUser->avatar;
             $new->save();
-            Auth::login($user);
+            Auth::login($new);
             return redirect('/');
             
         }
