@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call('EventSeeder');
         $this->call('InscriptionSeeder');
         // $this->call('PaymentSeeder');
-
+        
     }
 }

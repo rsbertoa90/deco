@@ -16,7 +16,7 @@ class CreatePersonalDataTable extends Migration
         Schema::create('personal_data', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('avatar')->default('/storage/app/images/no-image.jpg');
+            // $table->string('avatar')->default('/storage/app/images/no-image.jpg');
             $table->string('lastname')->nullable();
             $table->string('firstname')->nullable();
             $table->string('phone')->nullable();
