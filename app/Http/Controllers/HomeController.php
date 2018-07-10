@@ -28,10 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-       $fbuser = Socialite::driver('facebook')->user();
-       if($fbUser){
-           dd($fbUser);
-       }
+      
         $seminars = Seminar::all();
         $user = auth()->user();
         return view('index',compact('seminars','user'));
