@@ -36,7 +36,7 @@ return [
     ],
     'facebook' => [
         'client_id' => '191032835076952',
-        'client_secret' => 'e355a56171bca33e85b684b153f9a36e',
+        'client_secret' => '019be2f081b78ba6bf82fac4d4767ca3',
         'redirect' => '/fbLoginSuccess',
     ]
 
