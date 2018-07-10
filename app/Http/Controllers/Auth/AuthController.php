@@ -8,9 +8,5 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     //
-    public function findOrRegister()
-    {
-        $user =  Socialite::driver('facebook')->user();
-        dd($user);
-    }
+
 }
