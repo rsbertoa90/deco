@@ -54,6 +54,13 @@ Route::post('/registerPayment','PaymentController@register');
 
 Route::get('/fbLoginSuccess','LoginController@findOrRegister');
 
+// MELI
+
+Route::get('/meli-login','MeliController@login');
+
+Route::get('/meli-login-redirect','MeliController@loginRedirect');
+
+Route::get('/meli-redirect','MeliController@listener');
 
 
 // FONIK
