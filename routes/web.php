@@ -56,11 +56,11 @@ Route::get('/fbLoginSuccess','LoginController@findOrRegister');
 
 // MELI
 
-Route::get('/meli-login','MeliController@login');
+Route::get('/meli-login','MercadoPago@login');
 
-Route::get('/meli-login-redirect','MeliController@loginRedirect');
+Route::get('/meli-login-redirect','MercadoPago@createPrefence');
 
-Route::get('/meli-redirect','MeliController@listener');
+Route::get('/mercadopago-listener','MercadoPago@listener');
 
 
 // FONIK
