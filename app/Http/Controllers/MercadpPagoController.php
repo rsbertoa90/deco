@@ -70,6 +70,6 @@ class MercadoPagoController extends Controller
     public function loginRedirect(){}
         
     public function listener(){
-        return response('created',201);
+        return response('ok',200);
     }
 }
