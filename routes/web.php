@@ -58,7 +58,7 @@ Route::post('/register-payment','PaymentController@newPayment');
 // MELI
 
 
-Route::get('/mercadopago-listener','MercadoPagoController@listener');
+Route::post('/mercadopago-listener','MercadoPagoController@listener');
 
 Route::get('/test-user','MercadoPagoController@testUser');
 // FONIK
