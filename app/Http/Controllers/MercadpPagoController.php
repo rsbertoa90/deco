@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use MercadoPago;
 use App\User;
+use App\Payment;
 
 class MercadoPagoController extends Controller
 {
@@ -68,5 +69,7 @@ class MercadoPagoController extends Controller
 
     public function loginRedirect(){}
         
-    public function listener(){}
+    public function listener(){
+        return response ('ok',200);
+    }
 }
