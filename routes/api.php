@@ -44,6 +44,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
         // por id de evento traer nombre de seminario
         Route::get('/get-seminar-title/{id}','EventController@getSeminarName');
+
+        Route::post('/mercadopago-listener','MercadoPagoController@listener');
 // });
 
 
