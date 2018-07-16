@@ -6,6 +6,7 @@ use App\Event;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Cart;
+use App\Seminar;
 
 
 class EventController extends Controller 
@@ -110,6 +111,14 @@ class EventController extends Controller
         Cart::remove($cartItem->rowId);
         // Cart::store($user->id);
         return redirect('/');
+    }
+
+    public function getSeminarName($id)
+    {
+        if($id){
+            $seminar = Seminar::find($id);
+            return array($id);
+        }
     }
 
 }

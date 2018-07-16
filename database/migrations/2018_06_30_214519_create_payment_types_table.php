@@ -35,13 +35,13 @@ class CreatePaymentTypesTable extends Migration
             )
             
         );
-        DB::table('payment_types')->insert(
-            array(
-                'name' => 'efectivo',
-                'description' => 'Pag en efectivo presencial'
-            )
+        // DB::table('payment_types')->insert(
+        //     array(
+        //         'name' => 'efectivo',
+        //         'description' => 'Pag en efectivo presencial'
+        //     )
             
-        );
+        // );
         
     }
 

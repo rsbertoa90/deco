@@ -50,18 +50,16 @@ Route::get('/test', function(){return view('test');});
 
 Route::get('/registerPayment','PaymentController@userForm');
 
-Route::post('/registerPayment','PaymentController@register');
+// Route::post('/registerPayment','PaymentController@register');
 
 Route::get('/fbLoginSuccess','LoginController@findOrRegister');
 
+Route::post('/register-payment','PaymentController@newPayment');
 // MELI
 
-Route::get('/meli-login','MercadoPago@login');
 
-Route::get('/meli-login-redirect','MercadoPago@createPrefence');
+Route::get('/mercadopago-listener','MercadoPagoController@listener');
 
-Route::get('/mercadopago-listener','MercadoPago@listener');
-
-
+Route::get('/test-user','MercadoPagoController@testUser');
 // FONIK
 Route::get('{name?}','FonikController@showView');

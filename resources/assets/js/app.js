@@ -158,3 +158,10 @@
         "use strict";
         $.MainApp.init();
     }(window.jQuery);
+
+// window.axios = require('axios');
+// console.log(axios);
+
+
+
+// window.vue = require('vue');

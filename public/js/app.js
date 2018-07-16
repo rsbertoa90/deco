@@ -229,6 +229,12 @@ function ($) {
     $.MainApp.init();
 }(window.jQuery);
 
+// window.axios = require('axios');
+// console.log(axios);
+
+
+// window.vue = require('vue');
+
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {

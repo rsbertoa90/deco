@@ -41,6 +41,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route::put('/event/updateNumericField','EventController@updateNumericField');
     
         Route::delete('/event/delete/{id}','EventController@delete');
+
+        // por id de evento traer nombre de seminario
+        Route::get('/get-seminar-title/{id}','EventController@getSeminarName');
 // });
 
 
