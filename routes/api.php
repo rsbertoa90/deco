@@ -45,6 +45,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         // por id de evento traer nombre de seminario
         Route::get('/get-seminar-title/{id}','EventController@getSeminarName');
 
+        Route::get('/activeCitys','CityController@getActiveCitys');
+
+        Route::get('/events/city/{city}','EventController@getByCity');
+        Route::get('/events/online','EventController@getOnlineEvents');
+
+        Route::get('/payment_types','PaymentController@types');
+
         
 // });
 

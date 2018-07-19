@@ -78,7 +78,7 @@
                                        @if ($user && $user->avatar)
                                         <img src="{{ asset($user->avatar) }}" alt="user" class="rounded-circle">
                                        @else    
-                                        <img src="assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
+                                        <img src="/assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
                                        @endif 
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
@@ -89,7 +89,7 @@
                                                 <a class="dropdown-item" href="#"><i class="dripicons-gear text-muted"></i> Mis pagos</a>
                                             @else
                                                 <a class="dropdown-item" href="/admin"><i class="dripicons-lock text-muted"></i>Administracion</a>
-                                                <a class="dropdown-item" href="#"><i class="dripicons-lock text-muted"></i>Registar pagos</a>
+                                                <a class="dropdown-item" href="/admin/inscriptions"><i class="dripicons-lock text-muted"></i>Registar pagos</a>
                                             @endif
                                                 <a class="dropdown-item" href="/logout"><i class="dripicons-exit text-muted"></i>Salir</a>
                                             {{-- <form class="dropdown-item" action="/logout">

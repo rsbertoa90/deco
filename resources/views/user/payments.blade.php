@@ -7,7 +7,9 @@
         <div class="col-4">
             <select name="method" id="method" class="form-control">
                     @foreach (App\PaymentType::all() as $item)
-                        <option value="{{$item->id}}">{{$item->name}}</option>
+                        @if ($item->name != 'efectivo')
+                            <option value="{{$item->name}}">{{$item->name}}</option> 
+                        @endif
                     @endforeach
             </select>
         </div>

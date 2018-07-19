@@ -162,6 +162,16 @@
 // window.axios = require('axios');
 // console.log(axios);
 
+window.csrf = $('meta[name="csrf-token"]').attr('content');
 
+window.Vue = require('vue');
 
-// window.vue = require('vue');
+import inscriptions from './components/inscriptions.vue';
+Vue.component('inscriptions',inscriptions);
+
+if($('#vue-container').length>0){
+    const vueContainer = new Vue({
+        el:'#vue-container',
+    
+    });
+}

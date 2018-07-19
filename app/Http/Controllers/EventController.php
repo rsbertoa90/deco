@@ -121,4 +121,13 @@ class EventController extends Controller
         }
     }
 
+    public function getByCity($city){
+        return Event::with('seminar')->where('date','>=', now())->where('city',$city)->get();
+    }
+
+    public function getOnlineEvents()
+    {
+        return Event::with('seminar')->where('mode','online')->get();
+    }
+
 }

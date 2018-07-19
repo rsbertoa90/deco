@@ -9,6 +9,9 @@ use App\Event;
 use MercadoPago;
 use MP;
 use MercadoPago\item;
+use App\Payment;
+use App\PaymentType;
+use App\UnregisteredUser;
 
 class PaymentController extends Controller
 {
@@ -76,5 +79,35 @@ class PaymentController extends Controller
             return $this->handleMPpayment($request);
         }
 
+    }
+
+    public function inscriptions(){
+        $events = Event::future('presencial');
+        return view('admin/inscriptions',compact('events'));
+    }
+
+    public function registerInscription(Request $request)
+    {
+        $request->validate([
+            'events' => 'required',
+            'fbname' => 'required'
+        ]);
+        $user = UnregisteredUser::findOrCreate($request->fbname);
+      
+        $payment = new Payment();
+        $payment->user_type = 'unregistered';
+        $payment->unregistered_user_id = $user->id;
+        $payment->type =  $request->type;
+        $payment->comments = $request->comments;
+        $payment->save();
+        foreach($request->events as $id){
+            $event = Event::find($id);
+            $payment->events()->attach($event);
+        }
+        return redirect('/admin/inscriptions');
+    }
+
+    public function types(){
+        return PaymentType::all()->pluck('name');
     }
 }

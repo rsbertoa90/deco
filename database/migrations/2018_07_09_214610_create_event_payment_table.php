@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInscriptionPaymentTable extends Migration
+class CreateEventPaymentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateInscriptionPaymentTable extends Migration
      */
     public function up()
     {
-        Schema::create('inscription_payment', function (Blueprint $table) {
-            $table->integer('inscription_id')->unsigned();
+        Schema::create('event_payment', function (Blueprint $table) {
+            $table->integer('event_id')->unsigned();
             $table->integer('payment_id')->unsigned();
-            $table->foreign('inscription_id')->references('id')->on('inscriptions');
+            $table->foreign('event_id')->references('id')->on('events');
             $table->foreign('payment_id')->references('id')->on('payments');
             $table->softDeletes();
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateInscriptionPaymentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inscription_payment');
+        Schema::dropIfExists('event_payment');
     }
 }

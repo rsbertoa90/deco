@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 use App\Seminar;
 use App\User;
-use App\Inscription;
+
 use App\Program;
+use App\Payment;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 
 
@@ -21,7 +22,9 @@ class Event extends Model implements Buyable
     protected $guarded =[];
     protected $dates = ['created_at','updated_at','date','deleted_at'];
 
-  
+    public function payments(){
+        return $this->belongsToMany(Payment::class);
+    }
 
     public function getPriceAttribute($value)
     {
@@ -31,15 +34,6 @@ class Event extends Model implements Buyable
     public function setPriceAttribute($value)
     {
         $this->attributes["price"] = $value*100;
-    }
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class,'inscriptions');
-    }
-
-    public function inscriptions(){
-        return $this->hasMany(Inscription::class);
     }
 
     public function getDate(){
@@ -81,8 +75,21 @@ class Event extends Model implements Buyable
         return $this->price;
     }
 
+    public function inscriptions(){
+        return $this->payments()->groupBy('user_id')->count();
+    }
+
     public function isInscribed(User $user)
     {
-        return $this->inscriptions()->where('user_id',$user->id)->get()->first();
+        return $this->payments()->where('user_id',$user->id)->get()->first();
+    }
+
+    public static  function activeCitys()
+    {
+
+        $citys = Event::where('date','>=', now())->groupBy('city');
+        // $citys->pluck('city');
+        dd($citys->pluck('city'));
+       
     }
 }

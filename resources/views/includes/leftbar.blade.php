@@ -12,7 +12,7 @@
                     <div class="">
                         <!--<a href="index" class="logo text-center">Fonik</a>-->
                         <a href="/" class="logo ">
-                            <img src="assets/images/logo.png" height="150" class=" bg-white rounded-circle mt-3 ml-3" alt="logo">
+                            <img src="/assets/images/logo.png" height="150" class=" bg-white rounded-circle mt-3 ml-3" alt="logo">
                         </a>
                     </div>
                 </div>

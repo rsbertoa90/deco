@@ -16,7 +16,7 @@ class CreatePaymentTypesTable extends Migration
         Schema::create('payment_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->text('description');
+         
             $table->softDeletes();
             $table->timestamps();
         });
@@ -24,14 +24,21 @@ class CreatePaymentTypesTable extends Migration
         DB::table('payment_types')->insert(
             array(
                 'name' => 'transferencia bancaria',
-                'description' => 'transferencia bancaria'
+               
             )
             
         );
         DB::table('payment_types')->insert(
             array(
                 'name' => 'mercadopago',
-                'description' => 'Pago por la web'
+            
+            )
+            
+        );
+        DB::table('payment_types')->insert(
+            array(
+                'name' => 'efectivo',
+               
             )
             
         );

@@ -11,14 +11,19 @@
 |
 */
 
-Route::middleware('CheckAdmin')->prefix('/admin/')->group(function () {
+Route::middleware('CheckAdmin')->prefix('admin')->group(function () {
     
     Route::get('/','AdminController@panel');
-
+    
+    Route::get('/inscriptions','PaymentController@inscriptions');
+    
+    Route::post('/inscriptions','PaymentController@RegisterInscription');
+    
     // AJAX
     Route::get('/edi-table-seminars','AdminController@ediTableSeminars');
-
+    
     Route::get('/edi-table-seminar/{id}','AdminController@ediTableSeminar');
+
 
 });
 
@@ -46,7 +51,9 @@ Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallbac
 
 Route::get('/perfil','UserController@profile');
 
-Route::get('/test', function(){return view('test');});
+Route::get('/test', function(){
+    App\Event::activeCitys();
+});
 
 Route::get('/registerPayment','PaymentController@userForm');
 

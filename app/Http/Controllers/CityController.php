@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\State;
 use App\City;
+use App\Event;
+
 class CityController extends Controller
 {
     public function countrys()
@@ -24,5 +26,11 @@ class CityController extends Controller
     public function citys($state)
     {
         return City::where('state_id',$state)->get()->toJson(JSON_PRETTY_PRINT);
+    }
+
+    public function getActiveCitys(){
+        $citys = Event::where('date','>=', now())->where('city','<>','')->groupBy('city');
+        // $citys->pluck('city');
+        return $citys->pluck('city');
     }
 }
