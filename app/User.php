@@ -56,10 +56,7 @@ class User extends Authenticatable
         return $this->hasOne(PersonalData::class);
     }
 
-    public function events()
-    {
-        return $this->belongsToMany(Event::class,'inscriptions');
-    }
+    
 
     public function inscriptions()
     {

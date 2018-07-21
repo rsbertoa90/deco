@@ -10,6 +10,7 @@ use App\User;
 
 use App\Program;
 use App\Payment;
+use App\Inscription;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 
 
@@ -76,12 +77,12 @@ class Event extends Model implements Buyable
     }
 
     public function inscriptions(){
-        return $this->payments()->groupBy('user_id')->count();
+        return $this->hasMany(Inscription::class);
     }
 
     public function isInscribed(User $user)
     {
-        return $this->payments()->where('user_id',$user->id)->get()->first();
+        return $this->inscriptions()->where('user_id',$user->id)->get()->first();
     }
 
     public static  function activeCitys()

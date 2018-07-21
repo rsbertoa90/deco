@@ -11,6 +11,7 @@ use MP;
 use MercadoPago\item;
 use App\Payment;
 use App\PaymentType;
+use App\Inscription;
 use App\UnregisteredUser;
 
 class PaymentController extends Controller
@@ -86,28 +87,37 @@ class PaymentController extends Controller
         return view('admin/inscriptions',compact('events'));
     }
 
-    public function registerInscription(Request $request)
-    {
-        $request->validate([
-            'events' => 'required',
-            'fbname' => 'required'
-        ]);
-        $user = UnregisteredUser::findOrCreate($request->fbname);
-      
-        $payment = new Payment();
-        $payment->user_type = 'unregistered';
-        $payment->unregistered_user_id = $user->id;
-        $payment->type =  $request->type;
-        $payment->comments = $request->comments;
-        $payment->save();
-        foreach($request->events as $id){
-            $event = Event::find($id);
-            $payment->events()->attach($event);
-        }
-        return redirect('/admin/inscriptions');
-    }
-
+    
     public function types(){
         return PaymentType::all()->pluck('name');
     }
+
+    public function unregisteredPayment(Request $request)
+    {
+        // Traje un array de id's de inscripciones.traigo los objetos
+        $inscriptions = Inscription::find($request->inscriptions);
+        // Actuallizo el mail del usuario
+        if ($request->email){
+            $user  = $inscriptions[0]->unregisteredUser;
+            $user->email = $request->email;
+            $user->save();
+        }
+        // guardo los datos del pago
+        $payment = new Payment();
+        $payment->amount = $request->amount;
+        $payment->ticket = $request->ticket;
+        $payment->type = $request->type;
+        $payment->comment = $request->comment;
+        $payment->save();
+        $payment->inscriptions()->sync($inscriptions);
+
+        // le asigno a las incripciones el monto que les corresponde del pago
+        $total = $request->total;
+        // dd($request->except('_token'));
+        foreach ($inscriptions as $insc){
+             $insc->payd += $request->amount * ($insc->event->price / $request->total) ;
+             $insc->save();
+        }
+        return redirect('/admin/inscriptions');
+    }   
 }

@@ -41,7 +41,7 @@
                                 <td>{{ $event->city }}</td>
                                 <td> {{ $event->date->format('d/m/y') }} </td>
                                 <td> {{$event->date->format('h:i') }} </td>
-                                <td> {{ $event->inscriptions() }} /  {{$event->quota}} </td>
+                                <td> {{ $event->inscriptions->count() }} /  {{$event->quota}} </td>
                                 <td> {{ $event->price }} </td>
                                 @if ($user)
                                     @if (!$event->isInscribed($user))

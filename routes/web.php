@@ -17,12 +17,16 @@ Route::middleware('CheckAdmin')->prefix('admin')->group(function () {
     
     Route::get('/inscriptions','PaymentController@inscriptions');
     
-    Route::post('/inscriptions','PaymentController@RegisterInscription');
+    Route::post('/inscriptions','InscriptionController@RegisterInscription');
+
+    Route::post('/unregistered/registerPayment','PaymentController@unregisteredPayment');
     
     // AJAX
     Route::get('/edi-table-seminars','AdminController@ediTableSeminars');
     
     Route::get('/edi-table-seminar/{id}','AdminController@ediTableSeminar');
+
+    Route::get('/inscriptions/userSearch/{input}','InscriptionController@userSearch');
 
 
 });

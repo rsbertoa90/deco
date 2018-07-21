@@ -48,9 +48,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route::get('/activeCitys','CityController@getActiveCitys');
 
         Route::get('/events/city/{city}','EventController@getByCity');
+
         Route::get('/events/online','EventController@getOnlineEvents');
 
         Route::get('/payment_types','PaymentController@types');
+
+        Route::get('/inscriptions/unregistered/presencial/{user}','InscriptionController@getPresencials');
+        
+        Route::get('/inscriptions/unregistered/online/{user}','InscriptionController@getOnline');
 
         
 // });

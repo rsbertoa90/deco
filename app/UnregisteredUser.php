@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Payment;
+use App\Inscription;
 
 class UnregisteredUser extends Model
 {
@@ -24,7 +25,7 @@ class UnregisteredUser extends Model
         }
     }
 
-    public function payments(){
-        return $this->hasMany(Payment::class);
+    public function inscriptions(){
+        return $this->hasMany(Inscription::class);
     }
 }

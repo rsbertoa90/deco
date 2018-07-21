@@ -67,33 +67,6 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports) {
-
 /* globals __VUE_SSR_CONTEXT__ */
 
 // IMPORTANT: Do NOT use ES2015 features in this file.
@@ -200,12 +173,39 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(3);
-__webpack_require__(14);
-module.exports = __webpack_require__(15);
+__webpack_require__(23);
+module.exports = __webpack_require__(24);
 
 
 /***/ }),
@@ -11350,7 +11350,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(5).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(5).setImmediate))
 
 /***/ }),
 /* 5 */
@@ -11420,7 +11420,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 6 */
@@ -11613,7 +11613,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(7)))
 
 /***/ }),
 /* 7 */
@@ -11810,11 +11810,11 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(9)
 /* template */
-var __vue_template__ = __webpack_require__(13)
+var __vue_template__ = __webpack_require__(22)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -11860,8 +11860,10 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inscriptions_presencial_vue__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inscriptions_presencial_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__inscriptions_presencial_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__inscriptions_online_vue__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__inscriptions_online_vue__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__inscriptions_online_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__inscriptions_online_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payments_payments_vue__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payments_payments_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__payments_payments_vue__);
 //
 //
 //
@@ -11892,6 +11894,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -11904,8 +11911,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     components: {
-        'presencial': __WEBPACK_IMPORTED_MODULE_0__inscriptions_presencial_vue___default.a,
-        'online': __WEBPACK_IMPORTED_MODULE_1__inscriptions_online_vue___default.a
+        'insc-presencial': __WEBPACK_IMPORTED_MODULE_0__inscriptions_presencial_vue___default.a,
+        'insc-online': __WEBPACK_IMPORTED_MODULE_1__inscriptions_online_vue___default.a,
+        'insc-payments': __WEBPACK_IMPORTED_MODULE_2__payments_payments_vue___default.a
     }
 });
 
@@ -11914,7 +11922,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(11)
 /* template */
@@ -11962,6 +11970,12 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -12175,25 +12189,11 @@ var render = function() {
         2
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("label", { staticClass: "col-2", attrs: { for: "" } }, [
-          _vm._v("Tipo de pago")
-        ]),
-        _vm._v(" "),
-        _c(
-          "select",
-          { attrs: { required: "", name: "type" } },
-          _vm._l(_vm.paymentTypes, function(type) {
-            return _c("option", { key: type, domProps: { value: type } }, [
-              _vm._v(_vm._s(type))
-            ])
-          })
-        )
-      ]),
-      _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
       _vm._m(1),
+      _vm._v(" "),
+      _vm._m(2),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c(
@@ -12227,6 +12227,19 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group row" }, [
+      _c("label", { staticClass: "col-2" }, [_vm._v("Email-")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control col-4",
+        attrs: { type: "email", name: "email" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
       _c("label", { staticClass: "col-2" }, [_vm._v("Observaciones")]),
       _vm._v(" "),
       _c("textarea", {
@@ -12249,99 +12262,12 @@ if (false) {
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-4" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn-block button ",
-              class: {
-                "btn-success text-white": _vm.seminarType == "presencial",
-                "btn-outline-success": _vm.seminarType == "online"
-              },
-              on: {
-                click: function($event) {
-                  _vm.seminarType = "presencial"
-                }
-              }
-            },
-            [_vm._v("\n                         PRESENCIAL\n            ")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-4" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn-block button btn-outline-info ",
-              class: {
-                "btn-info text-white": _vm.seminarType == "online",
-                "btn-outline-info ": _vm.seminarType == "presencial"
-              },
-              on: {
-                click: function($event) {
-                  _vm.seminarType = "online"
-                }
-              }
-            },
-            [_vm._v("\n                ONLINE\n\n            ")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _vm.seminarType == "presencial" ? _c("presencial") : _vm._e(),
-      _vm._v(" "),
-      _vm.seminarType == "online" ? _c("online") : _vm._e()
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2ff7f09c", module.exports)
-  }
-}
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(24)
+var __vue_script__ = __webpack_require__(14)
 /* template */
-var __vue_template__ = __webpack_require__(25)
+var __vue_template__ = __webpack_require__(15)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -12380,11 +12306,15 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 24 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -12466,7 +12396,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 25 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -12542,25 +12472,11 @@ var render = function() {
         })
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("label", { staticClass: "col-2", attrs: { for: "" } }, [
-          _vm._v("Tipo de pago")
-        ]),
-        _vm._v(" "),
-        _c(
-          "select",
-          { attrs: { required: "", name: "type" } },
-          _vm._l(_vm.paymentTypes, function(type) {
-            return _c("option", { key: type, domProps: { value: type } }, [
-              _vm._v(_vm._s(type))
-            ])
-          })
-        )
-      ]),
-      _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
       _vm._m(1),
+      _vm._v(" "),
+      _vm._m(2),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c(
@@ -12594,6 +12510,19 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group row" }, [
+      _c("label", { staticClass: "col-2" }, [_vm._v("Email-")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control col-4",
+        attrs: { type: "email", name: "email" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
       _c("label", { staticClass: "col-2" }, [_vm._v("Observaciones")]),
       _vm._v(" "),
       _c("textarea", {
@@ -12611,6 +12540,903 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-523c7280", module.exports)
   }
 }
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(17)
+/* template */
+var __vue_template__ = __webpack_require__(21)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/payments/payments.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1b5d7970", Component.options)
+  } else {
+    hotAPI.reload("data-v-1b5d7970", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__create__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__create___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__create__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        'pay-create': __WEBPACK_IMPORTED_MODULE_0__create___default.a
+    },
+    data: function data() {
+        return {
+
+            users: null,
+            user: null,
+            userInput: null,
+            userSugestions: null
+        };
+    },
+
+    watch: {
+        userInput: function userInput() {
+            var vm = this;
+            if (this.userInput.length > 3) {
+                $.ajax({
+                    url: '/admin/inscriptions/userSearch/' + vm.userInput,
+                    success: function success(response) {
+                        if (response.length >= 0) {
+                            vm.userSugestions = response;
+                        }
+                    }
+                });
+            }
+        }
+    },
+    methods: {
+        setUser: function setUser(user) {
+            this.user = user;
+            var vm = this;
+
+            // presencial
+            $.ajax({
+                url: '/api/inscriptions/unregistered/presencial/' + vm.user.id,
+                success: function success(response) {
+                    Vue.set(vm.user, 'presencial', response);
+                }
+            });
+            // online
+            $.ajax({
+                url: '/api/inscriptions/unregistered/online/' + vm.user.id,
+                success: function success(response) {
+                    Vue.set(vm.user, 'online', response);
+                }
+            });
+        }
+    }
+
+});
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(19)
+/* template */
+var __vue_template__ = __webpack_require__(20)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/payments/create.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6d210b52", Component.options)
+  } else {
+    hotAPI.reload("data-v-6d210b52", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        user: { default: null }
+    },
+    data: function data() {
+        return {
+            selected: [],
+            // userInput :null,
+            // userSugestions:null,
+            // users:null,
+
+            total: 0,
+            url: null,
+            csrf: window.csrf,
+            paymentTypes: null
+        };
+    },
+
+    methods: {
+        getTotal: function getTotal() {
+            var tot = 0;
+            $('input[type=checkbox]:checked').each(function () {
+                // console.log($(this).attr('data-price'));     
+                tot += Number($(this).attr('data-price')) - Number($(this).attr('data-payd'));
+            });
+
+            return tot;
+        }
+    },
+    watch: {
+        selected: function selected() {
+            this.total = this.getTotal();
+        }
+    },
+    created: function created() {
+        var vm = this;
+        $.ajax({
+            url: '/api/payment_types',
+            success: function success(response) {
+                vm.paymentTypes = response;
+            }
+        });
+        // Lista de usuarios con inscripciones activas
+
+    },
+
+    computed: {
+        formValid: function formValid() {
+            if ($('input[type=checkbox]:checked').length > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row border-dark" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        staticClass: "col-12",
+        attrs: { action: "/admin/unregistered/registerPayment", method: "post" }
+      },
+      [
+        _c("input", {
+          attrs: { type: "hidden", name: "_token" },
+          domProps: { value: _vm.csrf }
+        }),
+        _vm._v(" "),
+        _vm.user
+          ? _c("div", { staticClass: "border-danger" }, [
+              _c("div", { staticClass: "col-12" }, [
+                _c(
+                  "table",
+                  { staticClass: "col-12 table-striped table-bordered" },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      [
+                        _vm._l(_vm.user.presencial, function(inscription) {
+                          return _c("tr", { key: inscription.id }, [
+                            _c("td", [
+                              inscription.payd < inscription.event.price
+                                ? _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.selected,
+                                        expression: "selected"
+                                      }
+                                    ],
+                                    attrs: {
+                                      "data-price": inscription.event.price,
+                                      "data-payd": inscription.payd,
+                                      type: "checkbox",
+                                      name: "inscriptions[]"
+                                    },
+                                    domProps: {
+                                      value: inscription.id,
+                                      checked: Array.isArray(_vm.selected)
+                                        ? _vm._i(_vm.selected, inscription.id) >
+                                          -1
+                                        : _vm.selected
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        var $$a = _vm.selected,
+                                          $$el = $event.target,
+                                          $$c = $$el.checked ? true : false
+                                        if (Array.isArray($$a)) {
+                                          var $$v = inscription.id,
+                                            $$i = _vm._i($$a, $$v)
+                                          if ($$el.checked) {
+                                            $$i < 0 &&
+                                              (_vm.selected = $$a.concat([$$v]))
+                                          } else {
+                                            $$i > -1 &&
+                                              (_vm.selected = $$a
+                                                .slice(0, $$i)
+                                                .concat($$a.slice($$i + 1)))
+                                          }
+                                        } else {
+                                          _vm.selected = $$c
+                                        }
+                                      }
+                                    }
+                                  })
+                                : _vm._e()
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c("b", [
+                                _vm._v(
+                                  "  " +
+                                    _vm._s(inscription.event.seminar.title) +
+                                    " "
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(inscription.event.state) +
+                                  " - " +
+                                  _vm._s(inscription.event.city) +
+                                  " "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(" " + _vm._s(inscription.event.date) + " ")
+                            ]),
+                            _vm._v(" "),
+                            inscription.payd < inscription.event.price
+                              ? _c("td", [
+                                  _vm._v(
+                                    " $" +
+                                      _vm._s(inscription.payd) +
+                                      " / $" +
+                                      _vm._s(inscription.event.price) +
+                                      "   "
+                                  )
+                                ])
+                              : _c("td", [
+                                  _c("span", { staticClass: "text-success" }, [
+                                    _vm._v("PAGO")
+                                  ])
+                                ])
+                          ])
+                        }),
+                        _vm._v(" "),
+                        _vm._l(_vm.user.online, function(inscription) {
+                          return _c("tr", { key: inscription.id }, [
+                            _c("td", [
+                              inscription.payd < inscription.event.price
+                                ? _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.selected,
+                                        expression: "selected"
+                                      }
+                                    ],
+                                    attrs: {
+                                      "data-price": inscription.event.price,
+                                      "data-payd": inscription.payd,
+                                      type: "checkbox",
+                                      name: "inscriptions[]"
+                                    },
+                                    domProps: {
+                                      value: inscription.id,
+                                      checked: Array.isArray(_vm.selected)
+                                        ? _vm._i(_vm.selected, inscription.id) >
+                                          -1
+                                        : _vm.selected
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        var $$a = _vm.selected,
+                                          $$el = $event.target,
+                                          $$c = $$el.checked ? true : false
+                                        if (Array.isArray($$a)) {
+                                          var $$v = inscription.id,
+                                            $$i = _vm._i($$a, $$v)
+                                          if ($$el.checked) {
+                                            $$i < 0 &&
+                                              (_vm.selected = $$a.concat([$$v]))
+                                          } else {
+                                            $$i > -1 &&
+                                              (_vm.selected = $$a
+                                                .slice(0, $$i)
+                                                .concat($$a.slice($$i + 1)))
+                                          }
+                                        } else {
+                                          _vm.selected = $$c
+                                        }
+                                      }
+                                    }
+                                  })
+                                : _vm._e()
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c("b", [
+                                _vm._v(
+                                  "  " +
+                                    _vm._s(inscription.event.seminar.title) +
+                                    " "
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("ONLINE")]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(" " + _vm._s(inscription.event.date) + " ")
+                            ]),
+                            _vm._v(" "),
+                            inscription.payd < inscription.event.price
+                              ? _c("td", [
+                                  _vm._v(
+                                    " $" +
+                                      _vm._s(inscription.payd) +
+                                      " / $" +
+                                      _vm._s(inscription.event.price) +
+                                      "   "
+                                  )
+                                ])
+                              : _c("td", [
+                                  _c("span", { staticClass: "text-success" }, [
+                                    _vm._v("PAGO")
+                                  ])
+                                ])
+                          ])
+                        })
+                      ],
+                      2
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row mt-4" }, [
+                _c("div", { staticClass: "col-12 row form-group" }, [
+                  _c("label", { staticClass: "col-2", attrs: { for: "" } }, [
+                    _vm._v("Email")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.email,
+                        expression: "user.email"
+                      }
+                    ],
+                    staticClass: "col-4",
+                    attrs: { type: "text", name: "email" },
+                    domProps: { value: _vm.user.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.user, "email", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row col-12" }, [
+                  _c("label", { staticClass: "col-2" }, [
+                    _vm._v("Tipo de pago")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control col-4",
+                      attrs: { required: "", name: "type" }
+                    },
+                    _vm._l(_vm.paymentTypes, function(type) {
+                      return _c(
+                        "option",
+                        {
+                          key: type,
+                          attrs: { name: "type" },
+                          domProps: { value: type }
+                        },
+                        [_vm._v(_vm._s(type))]
+                      )
+                    })
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 row form-group" }, [
+                  _c("label", { staticClass: "col-2", attrs: { for: "" } }, [
+                    _vm._v("Monto")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "col-4",
+                    attrs: {
+                      required: "",
+                      type: "number",
+                      name: "amount",
+                      max: _vm.total
+                    }
+                  }),
+                  _vm._v("\n                    / $ "),
+                  _c("input", {
+                    attrs: { type: "number", disabled: "" },
+                    domProps: { value: _vm.total }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "total" },
+                    domProps: { value: _vm.total }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 row form-group" }, [
+                  _c("label", { staticClass: "col-2", attrs: { for: "" } }, [
+                    _vm._v("URL comprobante de pago")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.url,
+                        expression: "url"
+                      }
+                    ],
+                    staticClass: "col-4",
+                    attrs: { type: "text", name: "ticket" },
+                    domProps: { value: _vm.url },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.url = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm.url
+                  ? _c("div", { staticClass: "col-12 row form-group" }, [
+                      _c("div", { staticClass: "offset-4 col-2" }, [
+                        _c("img", {
+                          staticStyle: { width: "100%" },
+                          attrs: { src: _vm.url, alt: "ticket" }
+                        })
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._m(2)
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "button btn-lg btn-outline-success",
+                  attrs: { disabled: _vm.formValid }
+                },
+                [_vm._v("ENVIAR")]
+              )
+            ])
+          : _vm._e()
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12" }, [
+      _c("h4", [_vm._v("Cargar pagos")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v(" Pagar ")]),
+      _vm._v(" "),
+      _c("th", [_vm._v(" Seminario ")]),
+      _vm._v(" "),
+      _c("th", [_vm._v(" Localidad ")]),
+      _vm._v(" "),
+      _c("th", [_vm._v(" Fecha ")]),
+      _vm._v(" "),
+      _c("th", [_vm._v(" Pagado ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 row form-group" }, [
+      _c("label", { staticClass: "col-2", attrs: { for: "" } }, [
+        _vm._v("Comentarios")
+      ]),
+      _vm._v(" "),
+      _c("textarea", {
+        staticClass: "form-control col-4",
+        attrs: { name: "comments", id: "" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6d210b52", module.exports)
+  }
+}
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "row form-group" }, [
+        _c("label", { attrs: { for: "" } }, [
+          _vm._v("Buscar usuario por nombre")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.userInput,
+              expression: "userInput"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text" },
+          domProps: { value: _vm.userInput },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.userInput = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _vm.userSugestions
+        ? _c("div", { staticClass: "row form-group" }, [
+            _c(
+              "div",
+              { staticClass: "col-4" },
+              _vm._l(_vm.userSugestions, function(sugestion) {
+                return _c("div", { key: sugestion.id, staticClass: "row" }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "text-center button btn-block btn-success",
+                      on: {
+                        click: function($event) {
+                          _vm.setUser(sugestion)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                      " +
+                          _vm._s(sugestion.fbname) +
+                          "\n                  "
+                      )
+                    ]
+                  )
+                ])
+              })
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.user ? _c("pay-create", { attrs: { user: _vm.user } }) : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1b5d7970", module.exports)
+  }
+}
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-4" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn-block button ",
+              class: {
+                "btn-success text-white": _vm.seminarType == "presencial",
+                "btn-outline-success": _vm.seminarType == "online"
+              },
+              on: {
+                click: function($event) {
+                  _vm.seminarType = "presencial"
+                }
+              }
+            },
+            [_vm._v("\n                PRESENCIAL\n            ")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-4" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn-block button btn-outline-info ",
+              class: {
+                "btn-info text-white": _vm.seminarType == "online",
+                "btn-outline-info ": _vm.seminarType == "presencial"
+              },
+              on: {
+                click: function($event) {
+                  _vm.seminarType = "online"
+                }
+              }
+            },
+            [_vm._v("\n                ONLINE\n            ")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _vm.seminarType == "presencial" ? _c("insc-presencial") : _vm._e(),
+      _vm._v(" "),
+      _vm.seminarType == "online" ? _c("insc-online") : _vm._e(),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("insc-payments")
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2ff7f09c", module.exports)
+  }
+}
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

@@ -16,17 +16,23 @@
                 </div>
             </div>
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
                 <label for="" class="col-2">Tipo de pago</label>
                 <select required name="type">
                     <option v-for="type in paymentTypes" :value="type" :key="type">{{type}}</option>
                 </select>
-            </div>
+            </div> -->
             
             <div class="form-group row">
                 <label class="col-2">Nombre -de facebook-</label>
                 <input  required type="text" name="fbname" class="form-control col-4">
             </div>
+            
+            <div class="form-group row">
+                <label class="col-2">Email-</label>
+                <input type="email" name="email" class="form-control col-4">
+            </div>
+
             <div class="form-group row">
                 <label class="col-2">Observaciones</label>
                 <textarea name="comments" class="form-control col-4" ></textarea>            
