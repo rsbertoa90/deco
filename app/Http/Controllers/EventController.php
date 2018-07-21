@@ -127,7 +127,7 @@ class EventController extends Controller
 
     public function getOnlineEvents()
     {
-        return Event::with('seminar')->where('mode','online')->get();
+        return Event::with('seminar')->where('date','>=', now())->where('mode','online')->get();
     }
 
 }
