@@ -8,7 +8,7 @@
             <div class="form-group row">
                 <div  class="col-12 row" v-for="event in events" :key="event.id">
                     <input v-model="selected" class="form-control col-1" type="checkbox" name="events[]" :value="event.id">
-                    <label for="" class="col-11"><b>  {{event.seminar.title}}</b> / {{event.state}} - {{event.city}} / {{event.date}}</label>
+                    <label for="" class="col-11"><b>  {{event.seminar.title}}</b> /ONLINE/ {{event.date}}</label>
                 </div>
             </div>
 
