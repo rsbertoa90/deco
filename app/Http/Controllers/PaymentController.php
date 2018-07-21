@@ -107,7 +107,7 @@ class PaymentController extends Controller
         $payment->amount = $request->amount;
         $payment->ticket = $request->ticket;
         $payment->type = $request->type;
-        $payment->comment = $request->comment;
+        $payment->comments = $request->comments;
         $payment->save();
         $payment->inscriptions()->sync($inscriptions);
 
