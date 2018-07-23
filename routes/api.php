@@ -57,7 +57,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         
         Route::get('/inscriptions/unregistered/online/{user}','InscriptionController@getOnline');
 
-        
+        Route::get('/payments/unregistered/{user}','PaymentController@getByUnRUser');
 // });
 
 

@@ -19,4 +19,13 @@ class Payment extends Model
     public function inscriptions(){
         return $this->belongsToMany(Inscription::class);
     }
+
+    public function cancel(){
+        foreach($this->inscriptions as $insc){
+            $insc->recalculatePayd();
+        }
+        return $this;
+    }
+
+   
 }

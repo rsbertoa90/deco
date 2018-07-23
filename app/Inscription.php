@@ -26,4 +26,30 @@ class Inscription extends Model
     public function payments(){
         return $this->belongsToMany(Payment::class);
     }
+    
+    public function recalculatePayd()
+    {
+        $payments = $this->payments()->where('status','not like','cancelado')->get();
+        $payd = 0;
+       
+        
+        foreach ($payments as $pay)
+        {
+            $total = 0;
+            foreach ($pay->inscriptions as $insc)
+            {
+                $total += $insc->event->price;
+            }
+            
+            if ($total == 0){
+                $payd = 0;
+            }else {
+                $payd += $pay->amount * ($this->event->price / $total);
+            }
+        }
+
+        $this->payd = $payd;
+        $this->save();
+    }
+  
 }

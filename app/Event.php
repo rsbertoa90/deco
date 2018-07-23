@@ -37,11 +37,11 @@ class Event extends Model implements Buyable
         $this->attributes["price"] = $value*100;
     }
 
-    public function getDate(){
+    public function getDayAttribute(){
         return  $this->date->format('d/m/y');
     }
    
-    public function getTime(){
+    public function getTimeAttribute(){
         return  $this->date->format('H:i A');
     }
 

@@ -18,6 +18,7 @@ class CreateUnregisteredUsersTable extends Migration
             $table->string('fbname');
             $table->string('email')->nullable();
             $table->text('comments')->nullable();
+            $table->integer('wallet')->default(0);
             $table->timestamps();
         });
     }

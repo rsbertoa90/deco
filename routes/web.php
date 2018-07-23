@@ -28,7 +28,10 @@ Route::middleware('CheckAdmin')->prefix('admin')->group(function () {
 
     Route::get('/inscriptions/userSearch/{input}','InscriptionController@userSearch');
 
+    Route::put('/payments/change-status/','PaymentController@changeStatus');
 
+    Route::delete('/unregistered/inscriptions/delete/{inscription}' , 'InscriptionController@delete');
+   
 });
 
 Auth::routes();

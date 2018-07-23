@@ -13,6 +13,7 @@ use App\Payment;
 use App\PaymentType;
 use App\Inscription;
 use App\UnregisteredUser;
+use App\User;
 
 class PaymentController extends Controller
 {
@@ -108,6 +109,7 @@ class PaymentController extends Controller
         $payment->ticket = $request->ticket;
         $payment->type = $request->type;
         $payment->comments = $request->comments;
+        $payment->status ="revision";
         $payment->save();
         $payment->inscriptions()->sync($inscriptions);
 
@@ -115,9 +117,27 @@ class PaymentController extends Controller
         $total = $request->total;
         // dd($request->except('_token'));
         foreach ($inscriptions as $insc){
-             $insc->payd += $request->amount * ($insc->event->price / $request->total) ;
-             $insc->save();
+             $insc->recalculatePayd();
         }
         return redirect('/admin/inscriptions');
     }   
+
+    public function getByUnRUser($user){
+        $result = Payment::with('inscriptions.event.seminar')->whereHas('inscriptions', function($query) use($user){
+            $query->where('unregistered_user_id',$user);
+        })->orderBy('created_at','desc')->get();
+        return $result;
+    }
+
+    public function changeStatus(Request $request)
+    {   
+       
+        $payment = Payment::find($request->payment);
+        $payment->status = $request->status;
+        $payment->save();
+
+        if ($payment->status == 'cancelado'){
+         return  $payment->cancel() ;
+        }
+    }
 }

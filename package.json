@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "autocomplete": "0.0.1",
-        "jquery-autocomplete": "^1.2.8"
+        "jquery-autocomplete": "^1.2.8",
+        "sweetalert2": "^7.25.6"
     }
 }

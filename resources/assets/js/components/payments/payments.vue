@@ -14,15 +14,20 @@
                    </div>
                </div>
         </div>
-        <pay-create v-if="user" :user="user"></pay-create>
+        <pay-create v-if="user" :user="user" @refresh="refresh"></pay-create>
+        <hr>
+        <pay-list  v-if="user"  class="mt-4" :user="user" ></pay-list>
     </div>
 </template>
 
 <script>
+    import { EventBus } from '../../app.js';
     import create from  './create'
+    import list from  './list'
     export default{
         components:{
-            'pay-create' :create
+            'pay-create' :create,
+            'pay-list' : list
         },
         data(){
             return{
@@ -49,6 +54,13 @@
                 },
         },
         methods: {
+            refresh(){
+              console.log('freshed up');
+            //   this.$forceUpdate();  
+              var resg = this.user;
+              this.user = null;
+              this.user =resg; 
+            },
             setUser(user){
                 this.user = user ;
                 var vm = this;
@@ -65,11 +77,19 @@
                 url: '/api/inscriptions/unregistered/online/'+vm.user.id,
                 success(response){
                     Vue.set(vm.user,'online',response);
-                    
                 }
             });
 
+            
+            
+
             }
+        },
+        created(){
+              EventBus.$on('refreshData', () => {
+                 console.log('event from bus');
+                this.setUser(this.user);
+            });
         }
 
     }

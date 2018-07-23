@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('provider')->default('local');
             $table->string('provider_id')->nullable();
             $table->string('avatar')->nullable();
+            $table->integer('wallet')->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

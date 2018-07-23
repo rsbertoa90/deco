@@ -21,7 +21,7 @@ class CreatePaymentsTable extends Migration
             $table->string('transaction_id')->nullable();
             $table->integer('amount')->nullable();
             $table->string('ticket')->nullable();
-            $table->string('status')->default('pending');
+            $table->string('status')->default('revision');
             $table->text('comments')->nullable();
             
             $table->timestamps();

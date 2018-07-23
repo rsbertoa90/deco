@@ -161,6 +161,14 @@
 
 // window.axios = require('axios');
 // console.log(axios);
+// ES6 Modules or TypeScript
+
+
+
+// CommonJS
+window.swal = require('sweetalert2')
+
+// console.log(swal);
 
 window.csrf = $('meta[name="csrf-token"]').attr('content');
 
@@ -168,6 +176,16 @@ window.Vue = require('vue');
 
 import inscriptions from './components/inscriptions.vue';
 Vue.component('inscriptions',inscriptions);
+
+export const EventBus = new Vue({
+    methods: {
+        emit(name,data = ''){
+            console.log('bus emiting');            
+           this.$emit(name,data);     
+        }
+    }
+});
+
 
 if($('#vue-container').length>0){
     const vueContainer = new Vue({

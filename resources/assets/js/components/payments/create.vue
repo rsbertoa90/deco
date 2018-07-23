@@ -1,8 +1,12 @@
 <template>
-    <div class="row border-dark">
+    <div   class="row border-dark">
         <div class="col-12">
-            <h4>Cargar pagos</h4>
+            <h4>Inscripciones: </h4>
         </div>
+      <hr>
+      <div class="row col-12" v-if="user.wallet > 0">
+        <span class="text-success font-weight-bold offset-2"> SALDO A FAVOR : $ {{user.wallet}} </span>  
+      </div>
       <hr>
        <form class="col-12" action="/admin/unregistered/registerPayment" method="post">
            <input type="hidden" name="_token" :value="csrf">
@@ -20,21 +24,35 @@
                         <tbody>
                             <tr v-for="inscription in user.presencial" :key="inscription.id" > 
                                
-                                    <td> <input v-if="inscription.payd < inscription.event.price" v-model="selected" :data-price="inscription.event.price" :data-payd="inscription.payd" type="checkbox" name="inscriptions[]" :value="inscription.id"> </td>
+                                    <td> <input v-if="inscription.payd < inscription.event.price" 
+                                                v-model="selectedEvents" 
+                                                :data-price="inscription.event.price" 
+                                                :data-payd="inscription.payd" 
+                                                type="checkbox" name="inscriptions[]" 
+                                                :value="inscription.id"> </td>
                                     <td> <b>  {{inscription.event.seminar.title}} </b> </td>
                                     <td> {{inscription.event.state}} - {{inscription.event.city}} </td>
                                     <td> {{inscription.event.date}} </td>
                                     <td v-if="inscription.payd < inscription.event.price"> ${{inscription.payd}} / ${{inscription.event.price}}   </td>
                                      <td v-else> <span class="text-success">PAGO</span>  </td>
+                                     <td> <button formnovalidate class="button btn-sm btn-outline-danger novalidate" @click.stop.prevent="cancelInscription(inscription)">Cancelar inscripcion</button> </td>
                             </tr>
                             <tr v-for="inscription in user.online" :key="inscription.id" > 
                                
-                                    <td> <input v-if="inscription.payd < inscription.event.price" v-model="selected" :data-price="inscription.event.price" :data-payd="inscription.payd" type="checkbox" name="inscriptions[]" :value="inscription.id"> </td>
+                                    <td> <input v-if="inscription.payd < inscription.event.price" 
+                                                v-model="selectedEvents" 
+                                                :data-price="inscription.event.price" 
+                                                :data-payd="inscription.payd" 
+                                                type="checkbox" 
+                                                name="inscriptions[]" 
+                                                :value="inscription.id"> </td>
+
                                     <td> <b>  {{inscription.event.seminar.title}} </b> </td>
                                     <td>ONLINE</td>
                                     <td> {{inscription.event.date}} </td>
                                     <td v-if="inscription.payd < inscription.event.price"> ${{inscription.payd}} / ${{inscription.event.price}}   </td>
                                     <td v-else> <span class="text-success">PAGO</span>  </td>
+                                    <td> <button formnovalidate class="button btn-sm btn-outline-danger novalidate" @click.stop.prevent="cancelInscription(inscription)"  >Cancelar inscripcion</button> </td>
                             </tr>
                         </tbody>
                     </table>
@@ -71,19 +89,20 @@
                         <textarea name="comments" id="" class="form-control col-4"></textarea>
                     </div>
                 </div>
-                <button class="button btn-lg btn-outline-success" :disabled="formValid" >ENVIAR</button>
+                <button class="button btn-lg btn-outline-success" :disabled="!formValid" >ENVIAR</button>
            </div>
        </form>
     </div>
 </template>
 <script>
+import { EventBus } from '../../app.js';
     export  default{
         props:{
             user :{default:null},
         },
         data(){
             return{
-                selected:[],
+                selectedEvents:[],
                 // userInput :null,
                 // userSugestions:null,
                 // users:null,
@@ -92,9 +111,32 @@
                 url: null,
                 csrf: window.csrf,
                 paymentTypes: null,
+                formValid:false,
             }
         },
         methods: {
+            cancelInscription(inscription){
+                 var revisionPay = inscription.payments.find(function(el){return el.status == 'revision'});
+                if (revisionPay == null){
+                    $.ajax({
+                        method : 'delete',
+                        url: `/admin/unregistered/inscriptions/delete/${inscription.id}`,
+                        success(){
+                            EventBus.$emit('refreshData');
+                        }
+
+                    });
+                }
+                else 
+                {
+                    swal({text : 'Esta inscripcion tiene pagos en revision.', type:'error'});
+                }
+                 
+            },
+            refreshData(){
+                console.log('freshed up man');
+                this.$forceUpdate();
+            },
             getTotal(){
                 var tot = 0;                
                 $('input[type=checkbox]:checked').each(function(){
@@ -106,8 +148,12 @@
             }
         },
         watch:{
-            selected(){
+            selectedEvents(){
+             
                 this.total = this.getTotal();
+                if (this.selectedEvents.length > 0) {this.formValid = true}
+                else {this.formValid = false}
+
             },
         },
         created(){
@@ -116,18 +162,9 @@
                 url : '/api/payment_types',
                 success(response){  
                     vm.paymentTypes = response;
-                }
+                },
             });
-            // Lista de usuarios con inscripciones activas
-
-           
         },
-        computed: {
-            formValid(){
-                if ($('input[type=checkbox]:checked').length > 0)
-                {return true}
-                else {return false}
-            }
-        }
+
     }
 </script>

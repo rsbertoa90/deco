@@ -17,13 +17,13 @@ class InscriptionController extends Controller
     {
         return Inscription::where('unregistered_user_id',$id)->with('event.seminar')->with('unregisteredUser')->whereHas('event',function($query){
             $query->where('mode', 'like', 'presencial');
-        })->get();
+        })->with('payments')->get();
     }
     public function getOnline($id)
     {
         return Inscription::where('unregistered_user_id',$id)->with('event.seminar')->with('unregisteredUser')->whereHas('event',function($query){
             $query->where('mode', 'like', 'online');
-        })->get();
+        })->with('payments')->get();
     }
 
     public function registerInscription(Request $request)
@@ -49,6 +49,18 @@ class InscriptionController extends Controller
             $inscription->save();
         }
         return redirect('/admin/inscriptions');
+    }
+
+    public function delete($id)
+    {
+        $inscription = Inscription::find($id);
+        $user = $inscription->unregisteredUser;
+        
+        $user->wallet += $inscription->payd;
+        $user->save();
+            
+        
+        $inscription->delete();
     }
 
 
